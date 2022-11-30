@@ -3,6 +3,7 @@ package com.example.cardapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,6 +12,7 @@ import com.example.cardapp.R
 import com.example.cardapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
     private var _binding: ActivityMainBinding? = null
     private val binding
         get() = _binding!!
@@ -30,7 +32,14 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.also {
             it.inflateHeaderView(R.layout.header_drawer)
             it.setupWithNavController(navController)
+            it.getHeaderView(0)
+                .findViewById<View>(R.id.imageView)
+                .setOnClickListener{
+                    navController.navigate(R.id.userFragment)
+                    binding.root.close()
+                }
         }
+
     }
 
     override fun onDestroy() {

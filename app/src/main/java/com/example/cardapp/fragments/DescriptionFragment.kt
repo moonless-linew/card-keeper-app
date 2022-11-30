@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.cardapp.databinding.FragmentMapBinding
+import com.example.cardapp.databinding.FragmentDescriptionBinding
 
-class MapFragment: Fragment() {
-    private var _binding: FragmentMapBinding? = null
+
+class DescriptionFragment: Fragment() {
+    private var _binding: FragmentDescriptionBinding? = null
     private val binding
         get() = _binding!!
     override fun onCreateView(
@@ -16,7 +17,7 @@ class MapFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMapBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentDescriptionBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
