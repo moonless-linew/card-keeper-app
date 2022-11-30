@@ -10,15 +10,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.cardapp.R
 import com.example.cardapp.databinding.ActivityMainBinding
+import com.example.cardapp.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-
+    //now it single activity
+    private lateinit var auth: FirebaseAuth
+    private lateinit var user: User
     private var _binding: ActivityMainBinding? = null
     private val binding
         get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = Firebase.auth
         _binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
@@ -45,5 +52,13 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    override fun onStart() {
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            user = currentUser as User;
+        }
+        super.onStart()
     }
 }
