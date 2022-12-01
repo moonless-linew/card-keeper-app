@@ -16,37 +16,36 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-    //now it single activity
-    private lateinit var auth: FirebaseAuth
-    private lateinit var user: User
     private var _binding: ActivityMainBinding? = null
     private val binding
         get() = _binding!!
+    val userData = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        auth = Firebase.auth
         _binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
 
 
-        val navHostFragment = binding.hostFragment.getFragment() as NavHostFragment
-        val navController = navHostFragment.navController
-        val appBarConfiguration = AppBarConfiguration(navController.graph, binding.root)
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
-        binding.navigationView.also {
-            it.inflateHeaderView(R.layout.header_drawer)
-            it.setupWithNavController(navController)
-            it.getHeaderView(0)
-                .findViewById<View>(R.id.imageView)
-                .setOnClickListener{
-                    navController.navigate(R.id.userFragment)
-                    binding.root.close()
-                }
-        }
+        setupNavigation()
 
+    }
+    private fun setupNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.activityNavigationHost) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        val navGraph = navController.navInflater.inflate(R.navigation.flow_graph)
+        when {
+            userData -> {
+                navGraph.setStartDestination(R.id.mainFlowFragment)
+            }
+            !userData -> {
+                navGraph.setStartDestination(R.id.authFlowFragment)
+            }
+        }
+        navController.graph = navGraph
     }
 
     override fun onDestroy() {
@@ -55,10 +54,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            user = currentUser as User;
-        }
         super.onStart()
     }
 }
