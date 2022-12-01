@@ -1,4 +1,4 @@
-package com.example.cardapp.fragments
+package com.example.cardapp.fragments.flow
 
 import com.example.cardapp.R
 

@@ -1,15 +1,14 @@
-package com.example.cardapp.fragments
+package com.example.cardapp.fragments.drawer
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.cardapp.databinding.FragmentDescriptionBinding
+import com.example.cardapp.databinding.FragmentUserBinding
 
-
-class DescriptionFragment: Fragment() {
-    private var _binding: FragmentDescriptionBinding? = null
+class UserFragment: Fragment() {
+    private var _binding: FragmentUserBinding? = null
     private val binding
         get() = _binding!!
     override fun onCreateView(
@@ -17,7 +16,7 @@ class DescriptionFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDescriptionBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentUserBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

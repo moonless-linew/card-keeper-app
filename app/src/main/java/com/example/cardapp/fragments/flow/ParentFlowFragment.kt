@@ -1,4 +1,4 @@
-package com.example.cardapp.fragments
+package com.example.cardapp.fragments.flow
 
 import android.os.Bundle
 import android.view.View

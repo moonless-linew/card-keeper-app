@@ -1,4 +1,4 @@
-package com.example.cardapp.fragments
+package com.example.cardapp.fragments.drawer
 
 import android.os.Bundle
 import android.view.LayoutInflater
