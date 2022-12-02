@@ -6,14 +6,14 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.cardapp.fragments.UserFragment"
+        android:name="com.example.cardapp.fragments.drawer.UserFragment"
         android:label="UserFragment" />
     <fragment
         android:id="@+id/cardsFragment"
-        android:name="com.example.cardapp.fragments.CardsFragment"
+        android:name="com.example.cardapp.fragments.drawer.CardsFragment"
         android:label="CardsFragment" />
     <fragment
         android:id="@+id/descriptionFragment"
-        android:name="com.example.cardapp.fragments.DescriptionFragment"
+        android:name="com.example.cardapp.fragments.drawer.DescriptionFragment"
         android:label="About CardApp" />
 </navigation>
