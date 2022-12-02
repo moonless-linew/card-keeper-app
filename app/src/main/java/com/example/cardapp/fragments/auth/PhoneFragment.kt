@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -31,23 +31,17 @@ class PhoneFragment: Fragment() {
 
 
     private fun setupClickSuccess() {
-        binding.successButton.setOnClickListener {
-            activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
+
         }
-    }
+
 
     private fun setupClickFail() {
-        binding.failButton.setOnClickListener {
-            Toast.makeText(requireActivity(), "FAIL", Toast.LENGTH_SHORT).show()
+
         }
-
-    }
-
 
     private fun Fragment.activityNavController() = requireActivity().findNavController(R.id.activityNavigationHost)
 
     private fun NavController.navigateSafely(@IdRes actionId: Int) {
         currentDestination?.getAction(actionId)?.let { navigate(actionId) }
     }
-
 }

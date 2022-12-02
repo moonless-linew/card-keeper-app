@@ -11,7 +11,7 @@
     <fragment
         android:id="@+id/cardsFragment"
         android:name="com.example.cardapp.fragments.drawer.CardsFragment"
-        android:label="CardsFragment" />
+        android:label="@string/your_cards" />
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.cardapp.fragments.drawer.DescriptionFragment"

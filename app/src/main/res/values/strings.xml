@@ -3,7 +3,7 @@
     <string name="map">Map</string>
     <string name="cards">Cards</string>
     <string name="user">User</string>
-    <string name="imageDescription">Ваша картинка</string>
+    <string name="imageDescription">Your Image</string>
     <string name="about_app">About App</string>
     <string name="share_app">Share app</string>
     <string name="settings">Settings</string>
@@ -23,4 +23,6 @@
     <string name="log_out">Log Out</string>
     <string name="error">Something went wrong</string>
     <string name="auth_error">No internet!</string>
+    <string name="what_is_your_phone_number">What is your\nphone number?</string>
+    <string name="your_cards">Your Cards</string>
 </resources>

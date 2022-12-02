@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentNameBinding
-import com.example.cardapp.interfaces.OnCompleteListener
+import com.example.cardapp.interfaces.OnAuthCompleteListener
 import com.example.cardapp.viewmodels.NameFragmentViewModel
 
 
@@ -27,8 +27,8 @@ class NameFragment: Fragment(R.layout.fragment_name) {
         binding.continueButton.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
             binding.continueButton.visibility = View.INVISIBLE
-            viewModel.registerUserWithName(binding.editName.text.toString(), object: OnCompleteListener{
-                override fun onComplete() {
+            viewModel.registerUserWithName(binding.editName.text.toString(), object: OnAuthCompleteListener{
+                override fun onSuccess() {
                     binding.progressBar.visibility = View.INVISIBLE
                     activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
                 }
