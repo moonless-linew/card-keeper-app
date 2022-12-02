@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
-
+    //this is a single activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
