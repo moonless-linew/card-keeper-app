@@ -5,36 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="регистрация"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/log_in_with_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.653" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/signButton"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/googleButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Вход"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/log_in_with_phone"
         app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabDots"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/googleButton"
+        android:contentDescription="@string/markers_showing_slide_states"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tabDots"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,11 +9,18 @@
         android:name="com.example.cardapp.fragments.auth.SignFragment"
         android:label="SignFragment" >
         <action
-            android:id="@+id/action_signFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            android:id="@+id/action_signFragment_to_phoneFragment"
+            app:destination="@id/phoneFragment" />
+        <action
+            android:id="@+id/action_signFragment_to_nameFragment"
+            app:destination="@id/nameFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.cardapp.fragments.auth.RegisterFragment"
+        android:id="@+id/phoneFragment"
+        android:name="com.example.cardapp.fragments.auth.PhoneFragment"
         android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/nameFragment"
+        android:name="com.example.cardapp.fragments.auth.NameFragment"
+        android:label="NameFragment" />
 </navigation>

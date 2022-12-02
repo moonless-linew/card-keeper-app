@@ -1,4 +1,3 @@
 package com.example.cardapp.models
 
-class User {
-}
+data class User(val name: String, val phone: String)

@@ -12,7 +12,8 @@ import androidx.navigation.findNavController
 import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentRegisterBinding
 
-class RegisterFragment: Fragment() {
+
+class PhoneFragment: Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding
         get() = _binding!!
@@ -42,9 +43,11 @@ class RegisterFragment: Fragment() {
 
     }
 
-    fun Fragment.activityNavController() = requireActivity().findNavController(R.id.activityNavigationHost)
 
-    fun NavController.navigateSafely(@IdRes actionId: Int) {
+    private fun Fragment.activityNavController() = requireActivity().findNavController(R.id.activityNavigationHost)
+
+    private fun NavController.navigateSafely(@IdRes actionId: Int) {
         currentDestination?.getAction(actionId)?.let { navigate(actionId) }
     }
+
 }

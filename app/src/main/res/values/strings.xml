@@ -10,4 +10,17 @@
     <string name="how_to_use">How to use?</string>
     <string name="favorites">Favorites</string>
     <string name="moonless_linew">moonless_linew</string>
+    <string name="log_in_with_google">Log in with Google</string>
+    <string name="log_in_with_name">Log in with name</string>
+    <string name="log_in_with_phone">Log in with phone</string>
+    <string name="markers_showing_slide_states">Markers showing slide states</string>
+    <string name="how_is_it_your_name">How is it your name?</string>
+    <string name="continue_text">Continue</string>
+    <string name="name">Name</string>
+    <string name="write_your_name">Write your name</string>
+    <string name="about">about</string>
+    <string name="what_is_it_your_name">What is your name?</string>
+    <string name="log_out">Log Out</string>
+    <string name="error">Something went wrong</string>
+    <string name="auth_error">No internet!</string>
 </resources>
