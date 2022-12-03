@@ -17,6 +17,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logOutButton"
+        style="@style/Widget.Material3.Button.TextButton"
         android:text="@string/log_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,6 +1,8 @@
 package com.example.cardapp.activities
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.example.cardapp.R
 import com.example.cardapp.databinding.ActivityMainBinding
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         get() = _binding!!
 
     private lateinit var auth: FirebaseAuth
+
     //this is a single activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         _binding = null
         super.onDestroy()
     }
+
 
     private fun setupNavigation() {
         val navHostFragment =
