@@ -2,7 +2,7 @@ package com.example.cardapp.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.cardapp.fragments.SlideFragment
+import com.example.cardapp.fragments.auth.SlideFragment
 import com.example.cardapp.fragments.auth.SignFragment
 
 class IntroductionViewPagerAdapter(fragment: SignFragment):  FragmentStateAdapter(fragment){

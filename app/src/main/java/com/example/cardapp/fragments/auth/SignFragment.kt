@@ -8,11 +8,10 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import com.example.cardapp.R
 import com.example.cardapp.adapters.IntroductionViewPagerAdapter
 import com.example.cardapp.databinding.FragmentSignBinding
-import com.google.android.material.tabs.TabLayoutMediator
+
 
 class SignFragment : Fragment() {
     private var _binding: FragmentSignBinding? = null
@@ -30,7 +29,7 @@ class SignFragment : Fragment() {
     }
 
     private fun setupClickLogWithPhone() {
-        binding.googleButton.setOnClickListener {
+        binding.phoneButton.setOnClickListener {
             findNavController().navigateSafely(R.id.action_signFragment_to_phoneFragment)
         }
     }
@@ -43,11 +42,11 @@ class SignFragment : Fragment() {
     }
 
     private fun setupViewPager() {
-        binding.viewPager2.also{
-            it.adapter = IntroductionViewPagerAdapter(this)
-            TabLayoutMediator(binding.tabDots, it){ tab, position ->
 
-            }.attach()
+        binding.viewPager2.also {
+            it.adapter = IntroductionViewPagerAdapter(this)
+            binding.tabDots.attachTo(it)
+
         }
 
     }

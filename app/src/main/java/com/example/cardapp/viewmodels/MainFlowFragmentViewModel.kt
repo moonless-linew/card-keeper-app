@@ -18,9 +18,7 @@ class MainFlowFragmentViewModel: ViewModel() {
             DataBase.downloadUser(uid, object: OnDownloadCompleteListener{
                 override fun onSuccess(document: DocumentSnapshot) {
                     user.postValue(User(document.get("name").toString(),""))
-
                 }
-
                 override fun onFail(e: Exception) {
 
                 }

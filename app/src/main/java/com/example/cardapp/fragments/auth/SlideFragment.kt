@@ -1,14 +1,10 @@
-package com.example.cardapp.fragments
+package com.example.cardapp.fragments.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
-import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.cardapp.databinding.FragmentMainBinding
-import com.example.cardapp.databinding.FragmentRegisterBinding
 import com.example.cardapp.databinding.FragmentSlideBinding
 import com.example.cardapp.utils.FragmentKeys
 
@@ -19,7 +15,7 @@ class SlideFragment(): Fragment(){
         get() = _binding!!
 
     companion object{
-        fun newInstance(image: Int): SlideFragment{
+        fun newInstance(image: Int): SlideFragment {
             val args = Bundle()
             args.putInt(FragmentKeys.IMAGE_KEY, image)
             val fragment = SlideFragment()
