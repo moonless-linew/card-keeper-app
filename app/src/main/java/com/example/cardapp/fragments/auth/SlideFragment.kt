@@ -18,7 +18,7 @@ class SlideFragment(): Fragment(){
     companion object{
         fun newInstance(slide: Slide): SlideFragment {
             val args = Bundle()
-            args.putParcelable(FragmentKeys.SLIDE_KEY, slide)
+            args.putInt(FragmentKeys.SLIDE_KEY, slide.position)
             val fragment = SlideFragment()
             fragment.arguments = args
             return fragment
@@ -31,7 +31,7 @@ class SlideFragment(): Fragment(){
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSlideBinding.inflate(layoutInflater, container, false)
-
+        binding.testImage.text = arguments?.getInt(FragmentKeys.SLIDE_KEY).toString()
 
         return binding.root
     }

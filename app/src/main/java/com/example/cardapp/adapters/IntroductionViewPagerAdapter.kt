@@ -8,7 +8,7 @@ import com.example.cardapp.models.Slide
 
 class IntroductionViewPagerAdapter(fragment: SignFragment, val data: List<Slide>):  FragmentStateAdapter(fragment){
     override fun getItemCount(): Int {
-        return 4
+        return data.size
     }
 
     override fun createFragment(position: Int): Fragment {

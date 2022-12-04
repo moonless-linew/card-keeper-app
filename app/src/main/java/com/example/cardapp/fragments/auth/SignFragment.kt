@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.cardapp.R
 import com.example.cardapp.adapters.IntroductionViewPagerAdapter
 import com.example.cardapp.databinding.FragmentSignBinding
+import com.example.cardapp.models.Slide
 
 
 class SignFragment : Fragment() {
@@ -44,7 +45,19 @@ class SignFragment : Fragment() {
     private fun setupViewPager() {
 
         binding.viewPager2.also {
-            it.adapter = IntroductionViewPagerAdapter(this)
+            it.adapter = IntroductionViewPagerAdapter(
+                this,
+                listOf(
+                    Slide(null, null, 0, R.drawable.default_dot),
+                    Slide(null, null, 1, R.drawable.default_dot),
+                    Slide(null, null, 2, R.drawable.default_dot),
+                    Slide(null, null, 3, R.drawable.default_dot),
+                    Slide(null, null, 4, R.drawable.default_dot),
+
+
+                    )
+            )
+
             binding.tabDots.attachTo(it)
 
         }
