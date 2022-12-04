@@ -48,14 +48,24 @@ class SignFragment : Fragment() {
             it.adapter = IntroductionViewPagerAdapter(
                 this,
                 listOf(
-                    Slide(null, null, 0, R.drawable.default_dot),
-                    Slide(null, null, 1, R.drawable.default_dot),
-                    Slide(null, null, 2, R.drawable.default_dot),
-                    Slide(null, null, 3, R.drawable.default_dot),
-                    Slide(null, null, 4, R.drawable.default_dot),
-
-
+                    Slide(
+                        "Light",
+                        "Your Nokia3310 can run this app",
+                        R.drawable.ic_baseline_help_24
+                    ),
+                    Slide(
+                        "Easy",
+                        "It can use even your grandmother",
+                        R.drawable.ic_baseline_credit_card_24
+                    ),
+                    Slide(
+                        "Smart",
+                        "Can choose card, using GPS \n (smarter than your ex)",
+                        R.drawable.ic_baseline_location_on_24
                     )
+
+
+                )
             )
 
             binding.tabDots.attachTo(it)
