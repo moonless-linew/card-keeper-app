@@ -1,5 +1,5 @@
 package com.example.cardapp.utils
 
 object FragmentKeys {
-    const val IMAGE_KEY = "image"
+    const val SLIDE_KEY = "object"
 }

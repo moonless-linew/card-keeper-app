@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.cardapp.databinding.FragmentSlideBinding
+import com.example.cardapp.models.Slide
 import com.example.cardapp.utils.FragmentKeys
 
 class SlideFragment(): Fragment(){
@@ -15,9 +16,9 @@ class SlideFragment(): Fragment(){
         get() = _binding!!
 
     companion object{
-        fun newInstance(image: Int): SlideFragment {
+        fun newInstance(slide: Slide): SlideFragment {
             val args = Bundle()
-            args.putInt(FragmentKeys.IMAGE_KEY, image)
+            args.putParcelable(FragmentKeys.SLIDE_KEY, slide)
             val fragment = SlideFragment()
             fragment.arguments = args
             return fragment
@@ -30,7 +31,8 @@ class SlideFragment(): Fragment(){
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSlideBinding.inflate(layoutInflater, container, false)
-        binding.testImage.text = arguments?.getInt(FragmentKeys.IMAGE_KEY).toString()
+
+
         return binding.root
     }
 }
