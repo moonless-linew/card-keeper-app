@@ -26,4 +26,5 @@
     <string name="what_is_your_phone_number">What is your\nphone number?</string>
     <string name="your_cards">Your Cards</string>
     <string name="image_of_feature">image of feature</string>
+    <string name="name_error">Name must be not empty and less than 30</string>
 </resources>
