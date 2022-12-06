@@ -25,29 +25,29 @@ class NameFragment : Fragment(R.layout.fragment_name) {
 
 
     private fun setupContinueButton() {
-        binding.continueButton.setOnClickListener {
+        binding.nameContinueButton.setOnClickListener {
             if (binding.editName.text.toString().length in 1..30) {
-                binding.progressBar.visibility = View.VISIBLE
-                binding.continueButton.visibility = View.INVISIBLE
+                binding.nameProgressBar.visibility = View.VISIBLE
+                binding.nameContinueButton.visibility = View.INVISIBLE
 
                 viewModel.registerUserWithName(
                     binding.editName.text.toString(),
                     object : OnAuthCompleteListener {
                         override fun onSuccess() {
-                            binding.progressBar.visibility = View.INVISIBLE
+                            binding.nameProgressBar.visibility = View.INVISIBLE
                             activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
                         }
 
                         override fun onFail() {
 
-                            binding.progressBar.visibility = View.INVISIBLE
-                            binding.continueButton.visibility = View.VISIBLE
+                            binding.nameProgressBar.visibility = View.INVISIBLE
+                            binding.nameContinueButton.visibility = View.VISIBLE
                             toastError(getString(R.string.error))
                         }
 
                         override fun onAuthFail() {
-                            binding.progressBar.visibility = View.INVISIBLE
-                            binding.continueButton.visibility = View.VISIBLE
+                            binding.nameProgressBar.visibility = View.INVISIBLE
+                            binding.nameContinueButton.visibility = View.VISIBLE
                             toastError(getString(R.string.auth_error))
                         }
                     })

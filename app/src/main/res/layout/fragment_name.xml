@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/continueButton"
+        android:id="@+id/nameContinueButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -52,7 +52,7 @@
 
     <ProgressBar
         android:visibility="invisible"
-        android:id="@+id/progressBar"
+        android:id="@+id/nameProgressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

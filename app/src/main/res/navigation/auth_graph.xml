@@ -18,9 +18,21 @@
     <fragment
         android:id="@+id/phoneFragment"
         android:name="com.example.cardapp.fragments.auth.PhoneFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_phoneFragment_to_smsFragment"
+            app:destination="@id/smsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nameFragment"
         android:name="com.example.cardapp.fragments.auth.NameFragment"
         android:label="NameFragment" />
+    <fragment
+        android:id="@+id/smsFragment"
+        android:name="com.example.cardapp.fragments.auth.SmsFragment"
+        android:label="SmsFragment" >
+        <action
+            android:id="@+id/action_smsFragment_to_nameFragment"
+            app:destination="@id/nameFragment" />
+    </fragment>
 </navigation>

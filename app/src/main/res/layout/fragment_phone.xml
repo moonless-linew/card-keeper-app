@@ -5,19 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editPhone"
+        style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:gravity="center"
+        android:hint="@string/phone_format"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/nameHeadline"
         style="@style/TextAppearance.Material3.HeadlineLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/write_your_name"
-        android:text="@string/what_is_your_phone_number"
         android:gravity="center"
         android:lines="2"
+        android:text="@string/what_is_your_phone_number"
+        app:layout_constraintBottom_toTopOf="@+id/editPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/phoneContinueButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/continue_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.329" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
