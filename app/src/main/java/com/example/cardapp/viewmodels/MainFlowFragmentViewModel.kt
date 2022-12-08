@@ -1,6 +1,7 @@
 package com.example.cardapp.viewmodels
 
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cardapp.database.DataBase
@@ -11,13 +12,14 @@ import java.lang.Exception
 
 
 class MainFlowFragmentViewModel: ViewModel() {
-    var user: MutableLiveData<User> = MutableLiveData<User>(User(null, null))
+    private var _user: MutableLiveData<User> = MutableLiveData<User>(User(null, null))
+    val user: LiveData<User>  = _user
 
     fun downloadUser(uid: String){
-        if(user.value?.name == null){
+        if(_user.value?.name == null){
             DataBase.downloadUser(uid, object: OnDownloadCompleteListener{
                 override fun onSuccess(document: DocumentSnapshot) {
-                    user.postValue(User(document.get("name").toString(),""))
+                    _user.postValue(User(document.get("name").toString(),""))
                 }
                 override fun onFail(e: Exception) {
 

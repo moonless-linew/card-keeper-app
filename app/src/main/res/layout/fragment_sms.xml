@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:scv_codeLength="6"
         app:scv_showCursor="false"
-        app:scv_smsDetectionMode="auto" />
+        app:scv_smsDetectionMode="manual" />
 
     <com.google.android.material.textview.MaterialTextView
         style="@style/TextAppearance.Material3.HeadlineLarge"

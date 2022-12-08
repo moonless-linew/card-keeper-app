@@ -22,7 +22,7 @@
     <string name="what_is_it_your_name">What is your name?</string>
     <string name="log_out">Log Out</string>
     <string name="error">Something went wrong</string>
-    <string name="auth_error">No internet!</string>
+    <string name="internet_error">No internet!</string>
     <string name="what_is_your_phone_number">What is your\nphone number?</string>
     <string name="your_cards">Your Cards</string>
     <string name="image_of_feature">image of feature</string>
@@ -31,4 +31,6 @@
     <string name="phone_format">+7 (___) ___ - __ - __</string>
     <string name="phone_error">"Enter phone number"</string>
     <string name="enter_sms_code">Enter SMS code</string>
+    <string name="too_much_requests">Too many SMS</string>
+    <string name="wrong_code">Wrong code</string>
 </resources>

@@ -1,18 +1,18 @@
 package com.example.cardapp.fragments.auth
 
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentPhoneBinding
+import com.example.cardapp.fragments.auth.status.SmsStatus
 import com.example.cardapp.utils.PhoneUtils
+import com.example.cardapp.viewmodels.PhoneSmsFragmentViewModel
 import ru.tinkoff.decoro.MaskImpl
 import ru.tinkoff.decoro.slots.PredefinedSlots
 import ru.tinkoff.decoro.watchers.FormatWatcher
@@ -20,6 +20,7 @@ import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 
 class PhoneFragment : Fragment() {
+    private val viewModel: PhoneSmsFragmentViewModel by activityViewModels()
     private var _binding: FragmentPhoneBinding? = null
     private val binding
         get() = _binding!!
@@ -32,18 +33,36 @@ class PhoneFragment : Fragment() {
         _binding = FragmentPhoneBinding.inflate(layoutInflater, container, false)
         setupClickContinue()
         setupEditPhone()
+        setupAuthStatusObserver()
         return binding.root
     }
 
 
     private fun setupClickContinue() {
         binding.phoneContinueButton.setOnClickListener {
-            if((binding.editPhone.text?.length ?: 0) == PhoneUtils.PHONE_LENGTH){
-                findNavController().navigateSafely(R.id.action_phoneFragment_to_smsFragment)
+            if (checkPhoneLength() == PhoneUtils.PHONE_LENGTH) {
+                startLoading()
+                viewModel.initPhoneAuth(
+                    binding.editPhone.text.toString().toPhoneStandard(),
+                    requireActivity()
+                )
+            } else {
+                toastError(getString(R.string.phone_error))
             }
-            else{
-                Toast.makeText(requireActivity(), getString(R.string.phone_error), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupAuthStatusObserver() {
+        viewModel.smsStatus.observe(viewLifecycleOwner) {
+            when (it) {
+                SmsStatus.CodeSent -> findNavController().navigateSafely(
+                    R.id.action_phoneFragment_to_smsFragment,
+                )
+                SmsStatus.VerificationCompleted -> {}
+                SmsStatus.VerificationFailed -> toastError(getString(R.string.error))
+                SmsStatus.TooManyRequests -> toastError(getString(R.string.too_much_requests))
             }
+            stopLoading()
         }
     }
 
@@ -53,7 +72,20 @@ class PhoneFragment : Fragment() {
         watcher.installOn(binding.editPhone)
     }
 
-    private fun NavController.navigateSafely(@IdRes actionId: Int) {
-        currentDestination?.getAction(actionId)?.let { navigate(actionId) }
+    private fun startLoading() {
+        binding.phoneProgressBar.visibility = View.VISIBLE
+        binding.phoneContinueButton.visibility = View.INVISIBLE
     }
+
+    private fun stopLoading() {
+        binding.phoneProgressBar.visibility = View.INVISIBLE
+        binding.phoneContinueButton.visibility = View.VISIBLE
+    }
+
+    private fun toastError(msg: String) {
+        Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun checkPhoneLength() = binding.editPhone.text?.length ?: 0
+
 }

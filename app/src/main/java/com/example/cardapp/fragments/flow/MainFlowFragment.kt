@@ -37,7 +37,7 @@ class MainFlowFragment : ParentFlowFragment(
                     binding.root.close()
                 }
         }
-        viewModel.user.observe(requireActivity()) {
+        viewModel.user.observe(viewLifecycleOwner) {
             binding
                 .navigationView
                 .getHeaderView(0)
