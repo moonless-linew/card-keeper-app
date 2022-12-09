@@ -1,6 +1,6 @@
 package com.example.cardapp.interfaces
 
-interface OnLoginCompleteListener {
+interface OnCompleteListener {
     fun onSuccess()
     fun onFail()
 }

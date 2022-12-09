@@ -1,24 +1,20 @@
 package com.example.cardapp.database
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.example.cardapp.interfaces.OnDownloadCompleteListener
-import com.example.cardapp.interfaces.OnLoginCompleteListener
 import com.example.cardapp.models.User
 import com.example.cardapp.utils.ApiUtils
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.protobuf.Api
 import java.util.concurrent.TimeUnit
 
 object DataBase {
 
-    fun loginUserWithName(name: String, listener: OnLoginCompleteListener){
+    fun loginUserWithName(listener: com.example.cardapp.interfaces.OnCompleteListener){
         Firebase.auth.signInAnonymously().addOnSuccessListener{
             listener.onSuccess()
         }.addOnFailureListener{
@@ -26,18 +22,18 @@ object DataBase {
         }
     }
 
-//    fun loginUserWithPhone(credential: PhoneAuthCredential) {
-//        Firebase.auth.signInWithCredential(credential).
-//    }
-//
-//    fun registerUserWithPhone() {
-//
-//    }
+    fun loginUserWithPhone(credential: PhoneAuthCredential, listener: com.example.cardapp.interfaces.OnCompleteListener) {
+        Firebase.auth.signInWithCredential(credential).addOnSuccessListener {
+            listener.onSuccess()
+        }.addOnFailureListener{
+            listener.onFail()
+        }
+    }
 
-    fun createUser(name: String?, phone: String?, listener: OnLoginCompleteListener) {
+    fun createUser(uid: String, name: String?, phone: String?, listener: com.example.cardapp.interfaces.OnCompleteListener) {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_USERS_COLLECTION)
-            .document(Firebase.auth.uid!!)
+            .document(uid)
             .set(User(name, phone))
             .addOnSuccessListener {
                 listener.onSuccess()
@@ -68,7 +64,7 @@ object DataBase {
     ) {
         val options = PhoneAuthOptions.newBuilder(Firebase.auth)
             .setPhoneNumber(phone)
-            .setTimeout(60L, TimeUnit.SECONDS)
+            .setTimeout(30, TimeUnit.SECONDS)
             .setActivity(activity)
             .setCallbacks(callback)
             .build()

@@ -31,9 +31,10 @@ class PhoneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPhoneBinding.inflate(layoutInflater, container, false)
+        toastError("Phone auth may work unpredictable")
         setupClickContinue()
         setupEditPhone()
-        setupAuthStatusObserver()
+        setupSmsStatusObserver()
         return binding.root
     }
 
@@ -52,7 +53,7 @@ class PhoneFragment : Fragment() {
         }
     }
 
-    private fun setupAuthStatusObserver() {
+    private fun setupSmsStatusObserver() {
         viewModel.smsStatus.observe(viewLifecycleOwner) {
             when (it) {
                 SmsStatus.CodeSent -> findNavController().navigateSafely(

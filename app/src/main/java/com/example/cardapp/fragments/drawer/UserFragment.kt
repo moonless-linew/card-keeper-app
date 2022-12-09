@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentUserBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -23,7 +21,7 @@ class UserFragment: Fragment() {
         _binding = FragmentUserBinding.inflate(layoutInflater, container, false)
         binding.logOutButton.setOnClickListener{
             Firebase.auth.signOut()
-            activityNavController().navigate(R.id.action_global_signFlowFragment)
+            requireActivity().finish()
         }
         return binding.root
     }
@@ -32,7 +30,6 @@ class UserFragment: Fragment() {
         super.onDestroy()
         _binding = null
     }
-    private fun Fragment.activityNavController() = requireActivity().findNavController(R.id.activityNavigationHost)
 
 
 }

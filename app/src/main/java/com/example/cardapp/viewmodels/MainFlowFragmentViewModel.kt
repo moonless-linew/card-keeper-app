@@ -8,7 +8,6 @@ import com.example.cardapp.database.DataBase
 import com.example.cardapp.interfaces.OnDownloadCompleteListener
 import com.example.cardapp.models.User
 import com.google.firebase.firestore.DocumentSnapshot
-import java.lang.Exception
 
 
 class MainFlowFragmentViewModel: ViewModel() {

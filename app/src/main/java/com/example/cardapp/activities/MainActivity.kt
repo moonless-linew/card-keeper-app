@@ -1,8 +1,7 @@
 package com.example.cardapp.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.example.cardapp.R
 import com.example.cardapp.databinding.ActivityMainBinding
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         auth = Firebase.auth
         setupNavigation()
 

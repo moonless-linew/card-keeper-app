@@ -32,11 +32,11 @@ class NameFragment : Fragment(R.layout.fragment_name) {
     }
 
     private fun phoneAuth() {
-        Toast.makeText(
-            requireActivity(),
-            Firebase.auth.currentUser?.phoneNumber.toString(),
-            Toast.LENGTH_SHORT
-        ).show()
+        if (binding.editName.text.toString().length in 1..30) {
+            startLoading()
+            viewModel.registerUserWithPhone(binding.editName.text.toString())
+        }
+        else toastError(getString(R.string.name_error))
     }
 
     private fun nameAuth() {
@@ -44,13 +44,17 @@ class NameFragment : Fragment(R.layout.fragment_name) {
             startLoading()
             viewModel.registerUserWithName(binding.editName.text.toString())
         }
+        else toastError(getString(R.string.name_error))
+
     }
 
     private fun setupAuthStatusObserver() {
         viewModel.authStatus.observe(viewLifecycleOwner) {
             when (it) {
                 NameAuthStatus.UnknownError -> toastError(getString(R.string.error))
-                NameAuthStatus.Success -> activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
+                NameAuthStatus.Success -> {
+                    activityNavController().navigateSafely(R.id.action_global_mainFlowFragment)
+                }
                 NameAuthStatus.InternetError -> toastError(getString(R.string.internet_error))
             }
             stopLoading()
