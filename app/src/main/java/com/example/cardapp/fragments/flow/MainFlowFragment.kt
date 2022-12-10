@@ -38,7 +38,7 @@ class MainFlowFragment : ParentFlowFragment(
                     binding.root.close()
                 }
         }
-        setupShareItem()
+
     }
 
     override fun setupListeners() {
