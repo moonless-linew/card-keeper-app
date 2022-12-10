@@ -17,8 +17,13 @@ abstract class ParentFlowFragment(
         val navHostFragment: NavHostFragment = childFragmentManager.findFragmentById(navHostFragmentId) as NavHostFragment
         val navController: NavController = navHostFragment.navController
         setupNavigation(navController)
+        setupListeners()
     }
     protected open fun setupNavigation(navController: NavController){
+
+    }
+
+    protected open fun setupListeners(){
 
     }
 

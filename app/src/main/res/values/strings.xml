@@ -33,4 +33,7 @@
     <string name="enter_sms_code">Enter SMS code</string>
     <string name="too_much_requests">Too many SMS</string>
     <string name="wrong_code">Wrong code</string>
+    <string name="add_description">add new card</string>
+    <string name="disk_link">Скачивай самое лучшее приложение на свете!\n https://disk.yandex.ru/d/uasodtkR8Olhhw</string>
+    <string name="image_of_store">image of store</string>
 </resources>

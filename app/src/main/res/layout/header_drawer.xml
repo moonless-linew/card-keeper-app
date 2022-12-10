@@ -7,8 +7,7 @@
 
 
     android:background="@color/white"
-    android:backgroundTint="?attr/colorPrimaryContainer"
-    >
+    android:backgroundTint="?attr/colorPrimaryContainer">
 
     <ImageView
         android:id="@+id/imageView"

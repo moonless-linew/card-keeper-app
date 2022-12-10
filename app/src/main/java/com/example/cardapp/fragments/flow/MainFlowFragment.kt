@@ -1,6 +1,7 @@
 package com.example.cardapp.fragments.flow
 
 
+import android.content.Intent
 import android.view.View
 
 import android.widget.TextView
@@ -37,12 +38,32 @@ class MainFlowFragment : ParentFlowFragment(
                     binding.root.close()
                 }
         }
+        setupShareItem()
+    }
+
+    override fun setupListeners() {
         viewModel.user.observe(viewLifecycleOwner) {
             binding
                 .navigationView
                 .getHeaderView(0)
                 .findViewById<TextView>(R.id.nameText)
                 .text = it.name
+        }
+    }
+
+    private fun setupShareItem(){
+        binding.navigationView.setNavigationItemSelectedListener {
+            if (it.itemId == R.id.shareFragment){
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, getString(R.string.disk_link))
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
+            }
+            return@setNavigationItemSelectedListener true
         }
     }
 

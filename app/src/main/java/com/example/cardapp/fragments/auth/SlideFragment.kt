@@ -36,13 +36,7 @@ class SlideFragment() : Fragment() {
         _binding = FragmentSlideBinding.inflate(layoutInflater, container, false)
         binding.titleText.text = arguments?.getString(SlidesUtils.TITLE)
         binding.descriptionText.text = arguments?.getString(SlidesUtils.DESCRIPTION)
-        binding.imageFeature.setImageDrawable(
-            ResourcesCompat.getDrawable(
-                resources,
-                arguments?.getInt(SlidesUtils.IMAGE) ?: 0,
-                null
-            )
-        )
+        binding.imageFeature.setImageResource(arguments?.getInt(SlidesUtils.IMAGE) ?: 0)
 
 
         return binding.root
