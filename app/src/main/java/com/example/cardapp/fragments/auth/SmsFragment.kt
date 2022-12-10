@@ -65,4 +65,9 @@ class SmsFragment : Fragment() {
         Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
+
 }

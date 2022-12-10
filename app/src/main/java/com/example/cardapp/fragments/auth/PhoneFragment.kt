@@ -89,4 +89,8 @@ class PhoneFragment : Fragment() {
 
     private fun checkPhoneLength() = binding.editPhone.text?.length ?: 0
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
 }

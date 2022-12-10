@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.example.cardapp.databinding.FragmentSlideBinding
 import com.example.cardapp.models.Slide
@@ -40,5 +39,9 @@ class SlideFragment() : Fragment() {
 
 
         return binding.root
+    }
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 }

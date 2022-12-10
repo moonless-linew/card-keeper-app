@@ -49,6 +49,10 @@ class SignFragment : Fragment() {
             binding.tabDots.attachTo(it)
         }
     }
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
 
 }
 

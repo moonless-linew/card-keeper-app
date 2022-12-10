@@ -31,12 +31,18 @@ class MainFlowFragment : ParentFlowFragment(
         binding.navigationView.also {
             it.inflateHeaderView(R.layout.header_drawer)
             it.setupWithNavController(navController)
+            //Open user fragment with image in header of drawer
             it.getHeaderView(0)
                 .findViewById<View>(R.id.imageView)
                 .setOnClickListener {
                     navController.navigate(R.id.userFragment)
                     binding.root.close()
                 }
+            //Configure share item to run share activity
+            it.menu.findItem(R.id.shareFragment).setOnMenuItemClickListener {
+                runShareActivity()
+                true
+            }
         }
 
     }
@@ -51,20 +57,15 @@ class MainFlowFragment : ParentFlowFragment(
         }
     }
 
-    private fun setupShareItem(){
-        binding.navigationView.setNavigationItemSelectedListener {
-            if (it.itemId == R.id.shareFragment){
-                val sendIntent: Intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, getString(R.string.disk_link))
-                    type = "text/plain"
-                }
-
-                val shareIntent = Intent.createChooser(sendIntent, null)
-                startActivity(shareIntent)
-            }
-            return@setNavigationItemSelectedListener true
+    private fun runShareActivity() {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, getString(R.string.disk_link))
+            type = "text/plain"
         }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
+
 
 }

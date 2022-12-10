@@ -76,4 +76,6 @@ class NameFragment : Fragment(R.layout.fragment_name) {
     }
 
 
+
+
 }

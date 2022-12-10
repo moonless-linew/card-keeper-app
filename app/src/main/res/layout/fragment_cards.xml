@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
+    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
         android:id="@+id/cardsRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:shimmer_demo_layout="@layout/item_card"
         app:shimmer_demo_layout_manager_type="linear_vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:shimmer_demo_angle="20"
-        tools:listitem="@layout/item_card"/>
+        app:shimmer_demo_angle="35"
+        tools:listitem="@layout/item_card"
+        app:shimmer_demo_duration="@integer/material_motion_duration_long_2"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"

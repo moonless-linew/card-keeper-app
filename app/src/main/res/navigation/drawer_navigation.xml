@@ -16,4 +16,5 @@
         android:id="@+id/descriptionFragment"
         android:name="com.example.cardapp.fragments.drawer.DescriptionFragment"
         android:label="About CardApp" />
+
 </navigation>
