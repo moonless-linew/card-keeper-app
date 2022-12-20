@@ -21,7 +21,12 @@ class CardsFragmentViewModel: ViewModel() {
         DataBase.downloadUserCards(uid, object: OnCollectionDownloadCompleteListener{
             override fun onSuccess(documents: QuerySnapshot) {
                 cardsData = documents.toObjects(Card::class.java)
-                _cardsDataStatus.postValue(CardDataStatus.Success)
+                if (cardsData.size == 0){
+                    _cardsDataStatus.postValue(CardDataStatus.Empty)
+                } else{
+                    _cardsDataStatus.postValue(CardDataStatus.Success)
+                }
+
             }
 
             override fun onFail(e: Exception) {

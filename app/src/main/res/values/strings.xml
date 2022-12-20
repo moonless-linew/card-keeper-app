@@ -36,4 +36,6 @@
     <string name="add_description">add new card</string>
     <string name="disk_link">Скачивай самое лучшее приложение на свете!\n https://disk.yandex.ru/d/uasodtkR8Olhhw</string>
     <string name="image_of_store">image of store</string>
+    <string name="search">Search shop</string>
+    <string name="nothing_to_show">Nothing to show :)</string>
 </resources>

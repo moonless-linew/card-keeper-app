@@ -9,20 +9,24 @@ object SlidesUtils {
     const val IMAGE = "image"
     val SLIDES = listOf(
         Slide(
-            "Light",
-            "Your Nokia3310 can run this app",
-            R.drawable.ic_baseline_help_24
-        ),
-        Slide(
-            "Easy",
-            "It can use even your grandmother",
+            "Functional",
+            "Do whatever you want",
             R.drawable.ic_baseline_credit_card_24
         ),
         Slide(
+            "Easy to use",
+            "Show this app your grandmother",
+            R.drawable.ic_baseline_mood_24
+        ),
+        Slide(
             "Smart",
-            "Can choose card, using GPS \n (smarter than your ex)",
+            "Can choose card, using GPS",
             R.drawable.ic_baseline_location_on_24
-        )
+        ),
+        Slide("Fast",
+        "Made with love",
+        R.drawable.ic_baseline_flash_on_24),
+
 
 
     )

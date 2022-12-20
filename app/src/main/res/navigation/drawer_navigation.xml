@@ -22,7 +22,7 @@
         android:label="About CardApp" />
     <fragment
         android:id="@+id/addCardFragment"
-        android:name="com.example.cardapp.fragments.AddCardFragment"
+        android:name="com.example.cardapp.fragments.drawer.AddCardFragment"
         android:label="AddCardFragment" />
 
 </navigation>

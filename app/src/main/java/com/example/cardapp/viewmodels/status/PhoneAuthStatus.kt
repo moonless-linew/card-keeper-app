@@ -1,4 +1,4 @@
-package com.example.cardapp.fragments.auth.status
+package com.example.cardapp.viewmodels.status
 
 sealed class PhoneAuthStatus{
     object SuccessLogin: PhoneAuthStatus()

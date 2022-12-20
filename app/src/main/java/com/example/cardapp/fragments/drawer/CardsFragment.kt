@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.cardapp.R
 import com.example.cardapp.adapters.CardsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentCardsBinding
+import com.example.cardapp.fragments.auth.navigateSafely
 import com.example.cardapp.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.viewmodels.status.CardDataStatus
 import com.google.firebase.auth.ktx.auth
@@ -24,9 +27,9 @@ class CardsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCardsBinding.inflate(layoutInflater, container, false)
-        binding.cardsRecycler.showShimmerAdapter()
+        setupFloatingButton()
         setupObservers()
-        viewModel.downloadData(Firebase.auth.uid!!)
+        downloadData()
         return binding.root
     }
 
@@ -36,10 +39,31 @@ class CardsFragment: Fragment() {
                 CardDataStatus.Fail -> {}
                 CardDataStatus.Success -> {
                     binding.cardsRecycler.adapter = CardsRecyclerAdapter(viewModel.cardsData)
-                    binding.cardsRecycler.hideShimmerAdapter()
+                    stopLoading()
                 }
+                CardDataStatus.Empty -> {
+                    binding.cardsRecycler.visibility = View.INVISIBLE
+                    binding.textNothingToShow.visibility = View.VISIBLE
+                }
+                CardDataStatus.Nan -> downloadData()
             }
         }
+    }
+    private fun setupFloatingButton(){
+        binding.floatingActionButton.setOnClickListener{
+            findNavController().navigateSafely(R.id.action_cardsFragment_to_addCardFragment)
+        }
+    }
+    private fun downloadData(){
+        startLoading()
+
+    }
+    private fun startLoading(){
+        binding.cardsRecycler.showShimmerAdapter()
+        viewModel.downloadData(Firebase.auth.uid!!)
+    }
+    private fun stopLoading(){
+        binding.cardsRecycler.hideShimmerAdapter()
     }
 
     override fun onDestroy() {

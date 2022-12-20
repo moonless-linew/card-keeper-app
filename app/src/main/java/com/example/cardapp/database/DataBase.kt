@@ -80,7 +80,7 @@ object DataBase {
     ) {
         val options = PhoneAuthOptions.newBuilder(Firebase.auth)
             .setPhoneNumber(phone)
-            .setTimeout(30, TimeUnit.SECONDS)
+            .setTimeout(30L, TimeUnit.SECONDS)
             .setActivity(activity)
             .setCallbacks(callback)
             .build()

@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <com.cooltechworks.views.shimmer.ShimmerRecyclerView
         android:id="@+id/cardsRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:shimmer_demo_layout="@layout/item_card"
-        app:shimmer_demo_layout_manager_type="linear_vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:shimmer_demo_angle="35"
-        tools:listitem="@layout/item_card"
-        app:shimmer_demo_duration="@integer/material_motion_duration_long_2"/>
+        app:shimmer_demo_duration="@integer/material_motion_duration_long_2"
+        app:shimmer_demo_layout="@layout/item_card"
+        app:shimmer_demo_layout_manager_type="linear_vertical"
+        tools:listitem="@layout/item_card" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -27,5 +28,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textNothingToShow"
+        style="@style/TextAppearance.Material3.HeadlineLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nothing_to_show"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
