@@ -4,14 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.example.cardapp.R
-import com.example.cardapp.database.DataBase
 import com.example.cardapp.databinding.ActivityMainBinding
-import com.example.cardapp.fragments.auth.status.PhoneAuthStatus
-import com.example.cardapp.interfaces.OnDownloadCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.ktx.getField
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {

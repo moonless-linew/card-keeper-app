@@ -11,10 +11,18 @@
     <fragment
         android:id="@+id/cardsFragment"
         android:name="com.example.cardapp.fragments.drawer.CardsFragment"
-        android:label="@string/your_cards" />
+        android:label="@string/your_cards" >
+        <action
+            android:id="@+id/action_cardsFragment_to_addCardFragment"
+            app:destination="@id/addCardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.cardapp.fragments.drawer.DescriptionFragment"
         android:label="About CardApp" />
+    <fragment
+        android:id="@+id/addCardFragment"
+        android:name="com.example.cardapp.fragments.AddCardFragment"
+        android:label="AddCardFragment" />
 
 </navigation>

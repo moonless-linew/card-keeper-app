@@ -53,7 +53,7 @@ class MainFlowFragment : ParentFlowFragment(
                 .navigationView
                 .getHeaderView(0)
                 .findViewById<TextView>(R.id.nameText)
-                .text = it.name
+                .text = it?.name
         }
     }
 

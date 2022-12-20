@@ -1,5 +1,5 @@
 package com.example.cardapp.models
 
-import androidx.annotation.DrawableRes
-
-data class Card(val market: String?, val description: String?, @DrawableRes val image: Int)
+data class Card(val id: String?, val marketID: String?){
+    constructor() : this(null, null)
+}

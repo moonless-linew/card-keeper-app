@@ -1,7 +1,9 @@
 package com.example.cardapp.database
 
 import androidx.fragment.app.FragmentActivity
-import com.example.cardapp.interfaces.OnDownloadCompleteListener
+import com.example.cardapp.interfaces.OnCollectionDownloadCompleteListener
+import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
+import com.example.cardapp.models.Card
 import com.example.cardapp.models.User
 import com.example.cardapp.utils.ApiUtils
 import com.google.firebase.auth.PhoneAuthCredential
@@ -34,7 +36,7 @@ object DataBase {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_USERS_COLLECTION)
             .document(uid)
-            .set(User(name, phone))
+            .set(User(name, phone, listOf(Card())))
             .addOnSuccessListener {
                 listener.onSuccess()
             }
@@ -43,10 +45,24 @@ object DataBase {
             }
     }
 
-    fun downloadUser(uid: String, listener: OnDownloadCompleteListener) {
+    fun downloadUser(uid: String, listener: OnDocumentDownloadCompleteListener) {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_USERS_COLLECTION)
             .document(uid)
+            .get()
+            .addOnSuccessListener {
+                listener.onSuccess(it)
+            }
+            .addOnFailureListener {
+                listener.onFail(it)
+            }
+    }
+
+    fun downloadUserCards(uid: String, listener: OnCollectionDownloadCompleteListener) {
+        FirebaseFirestore.getInstance()
+            .collection(ApiUtils.API_USERS_COLLECTION)
+            .document(uid)
+            .collection(ApiUtils.API_CARDS_COLLECTION)
             .get()
             .addOnSuccessListener {
                 listener.onSuccess(it)

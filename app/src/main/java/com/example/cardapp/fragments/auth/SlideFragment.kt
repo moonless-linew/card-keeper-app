@@ -9,7 +9,7 @@ import com.example.cardapp.databinding.FragmentSlideBinding
 import com.example.cardapp.models.Slide
 import com.example.cardapp.utils.SlidesUtils
 
-class SlideFragment() : Fragment() {
+class SlideFragment : Fragment() {
 
     private var _binding: FragmentSlideBinding? = null
     private val binding

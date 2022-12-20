@@ -8,7 +8,7 @@ import com.example.cardapp.database.DataBase
 import com.example.cardapp.fragments.auth.status.PhoneAuthStatus
 import com.example.cardapp.fragments.auth.status.SmsStatus
 import com.example.cardapp.interfaces.OnCompleteListener
-import com.example.cardapp.interfaces.OnDownloadCompleteListener
+import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.PhoneAuthCredential
@@ -77,7 +77,7 @@ class PhoneSmsFragmentViewModel : ViewModel() {
     }
 
     fun checkRegistration() {
-        DataBase.downloadUser(Firebase.auth.uid!!, object : OnDownloadCompleteListener {
+        DataBase.downloadUser(Firebase.auth.uid!!, object : OnDocumentDownloadCompleteListener {
             override fun onSuccess(document: DocumentSnapshot) {
                 if (document.getField<String>("name") != null) {
                     _authStatus.postValue(PhoneAuthStatus.Registered)
