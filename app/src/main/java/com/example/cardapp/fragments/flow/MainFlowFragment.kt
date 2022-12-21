@@ -1,8 +1,10 @@
 package com.example.cardapp.fragments.flow
 
 
+import android.app.Activity
 import android.content.Intent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 
 import android.widget.TextView
 import androidx.fragment.app.viewModels
@@ -24,6 +26,7 @@ class MainFlowFragment : ParentFlowFragment(
 
 
     override fun setupNavigation(navController: NavController) {
+        hideKeyBoard()
         viewModel.downloadUser(Firebase.auth.uid.toString())
         binding.navigationView.setupWithNavController(navController)
         val appBarConfiguration = AppBarConfiguration(navController.graph, binding.root)
@@ -65,6 +68,12 @@ class MainFlowFragment : ParentFlowFragment(
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+    }
+
+    private fun hideKeyBoard() {
+        (requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).also {
+            it.hideSoftInputFromWindow(view?.windowToken, 0)
+        }
     }
 
 

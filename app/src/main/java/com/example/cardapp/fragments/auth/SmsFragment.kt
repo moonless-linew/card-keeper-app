@@ -10,6 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentSmsBinding
+import com.example.cardapp.extensions.activityNavController
+import com.example.cardapp.extensions.navigateSafely
 import com.example.cardapp.viewmodels.status.PhoneAuthStatus
 import com.example.cardapp.viewmodels.PhoneSmsFragmentViewModel
 import com.fraggjkee.smsconfirmationview.SmsConfirmationView

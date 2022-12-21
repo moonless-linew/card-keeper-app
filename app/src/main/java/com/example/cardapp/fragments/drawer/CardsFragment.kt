@@ -10,9 +10,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.cardapp.R
 import com.example.cardapp.adapters.CardsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentCardsBinding
-import com.example.cardapp.fragments.auth.navigateSafely
+import com.example.cardapp.extensions.navigateSafely
+import com.example.cardapp.interfaces.CardCallback
+import com.example.cardapp.models.Card
 import com.example.cardapp.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.viewmodels.status.CardDataStatus
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -21,6 +24,7 @@ class CardsFragment: Fragment() {
     private val binding
         get() = _binding!!
     private val viewModel: CardsFragmentViewModel by viewModels()
+    private val cardCallback: CardCallback = CardCallback { BottomSheetBehavior.from(binding.sheetCard.bottomSheet).state = BottomSheetBehavior.STATE_EXPANDED }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,7 +42,7 @@ class CardsFragment: Fragment() {
             when (it) {
                 CardDataStatus.Fail -> {}
                 CardDataStatus.Success -> {
-                    binding.cardsRecycler.adapter = CardsRecyclerAdapter(viewModel.cardsData)
+                    binding.cardsRecycler.adapter = CardsRecyclerAdapter(viewModel.cardsData, cardCallback)
                     stopLoading()
                 }
                 CardDataStatus.Empty -> {

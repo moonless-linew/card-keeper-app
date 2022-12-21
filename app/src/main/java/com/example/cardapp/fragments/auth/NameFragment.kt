@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentNameBinding
+import com.example.cardapp.extensions.activityNavController
+import com.example.cardapp.extensions.navigateSafely
 import com.example.cardapp.viewmodels.status.NameAuthStatus
 import com.example.cardapp.viewmodels.NameFragmentViewModel
 import com.google.firebase.auth.ktx.auth

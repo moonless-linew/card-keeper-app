@@ -1,4 +1,4 @@
-package com.example.cardapp.fragments.auth
+package com.example.cardapp.extensions
 
 import android.os.Bundle
 import androidx.annotation.IdRes

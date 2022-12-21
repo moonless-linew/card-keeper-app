@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.cardapp.R
 import com.example.cardapp.adapters.IntroductionViewPagerAdapter
 import com.example.cardapp.databinding.FragmentSignBinding
+import com.example.cardapp.extensions.navigateSafely
 import com.example.cardapp.utils.SlidesUtils
 
 
