@@ -19,12 +19,16 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class CardsFragment: Fragment() {
+class CardsFragment : Fragment() {
     private var _binding: FragmentCardsBinding? = null
     private val binding
         get() = _binding!!
     private val viewModel: CardsFragmentViewModel by viewModels()
-    private val cardCallback: CardCallback = CardCallback { BottomSheetBehavior.from(binding.sheetCard.bottomSheet).state = BottomSheetBehavior.STATE_EXPANDED }
+    private val cardCallback: CardCallback = CardCallback {
+        BottomSheetBehavior.from(binding.sheetCard.bottomSheet).state =
+            BottomSheetBehavior.STATE_EXPANDED
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,12 +41,13 @@ class CardsFragment: Fragment() {
         return binding.root
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
         viewModel.cardsDataStatus.observe(viewLifecycleOwner) {
             when (it) {
                 CardDataStatus.Fail -> {}
                 CardDataStatus.Success -> {
-                    binding.cardsRecycler.adapter = CardsRecyclerAdapter(viewModel.cardsData, cardCallback)
+                    binding.cardsRecycler.adapter =
+                        CardsRecyclerAdapter(viewModel.cardsData, cardCallback)
                     stopLoading()
                 }
                 CardDataStatus.Empty -> {
@@ -53,20 +58,24 @@ class CardsFragment: Fragment() {
             }
         }
     }
-    private fun setupFloatingButton(){
-        binding.floatingActionButton.setOnClickListener{
+
+    private fun setupFloatingButton() {
+        binding.floatingActionButton.setOnClickListener {
             findNavController().navigateSafely(R.id.action_cardsFragment_to_addCardFragment)
         }
     }
-    private fun downloadData(){
+
+    private fun downloadData() {
         startLoading()
 
     }
-    private fun startLoading(){
+
+    private fun startLoading() {
         binding.cardsRecycler.showShimmerAdapter()
         viewModel.downloadData(Firebase.auth.uid!!)
     }
-    private fun stopLoading(){
+
+    private fun stopLoading() {
         binding.cardsRecycler.hideShimmerAdapter()
     }
 
@@ -74,4 +83,5 @@ class CardsFragment: Fragment() {
         super.onDestroy()
         _binding = null
     }
+
 }

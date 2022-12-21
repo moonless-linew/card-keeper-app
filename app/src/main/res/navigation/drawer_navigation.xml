@@ -24,5 +24,9 @@
         android:id="@+id/addCardFragment"
         android:name="com.example.cardapp.fragments.drawer.AddCardFragment"
         android:label="AddCardFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.cardapp.fragments.drawer.SettingsFragment"
+        android:label="SettingsFragment" />
 
 </navigation>
