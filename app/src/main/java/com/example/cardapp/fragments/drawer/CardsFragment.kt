@@ -1,13 +1,16 @@
 package com.example.cardapp.fragments.drawer
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cardapp.R
+
 import com.example.cardapp.adapters.CardsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentCardsBinding
 import com.example.cardapp.extensions.navigateSafely
@@ -17,6 +20,9 @@ import com.example.cardapp.viewmodels.status.CardDataStatus
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.zxing.BarcodeFormat
+import com.journeyapps.barcodescanner.BarcodeEncoder
+
 
 class CardsFragment : Fragment() {
     private var _binding: FragmentCardsBinding? = null
@@ -27,6 +33,10 @@ class CardsFragment : Fragment() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.sheetCard.bottomSheet)
         binding.sheetCard.bottomSheetCardId.text = it.id
         binding.sheetCard.bottomSheetMarketName.text = it.market?.name
+//        val barcodeEncoder = BarcodeEncoder()
+//        val bitmap = barcodeEncoder.encodeBitmap(it.id, BarcodeFormat.QR_CODE, 100, 100)
+//        val imageViewQrCode = binding.sheetCard.bottomSheetQrView
+//        imageViewQrCode.setImageBitmap(bitmap)
         bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_EXPANDED
     }
@@ -34,7 +44,7 @@ class CardsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentCardsBinding.inflate(layoutInflater, container, false)
         setupFloatingButton()

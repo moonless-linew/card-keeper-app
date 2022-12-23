@@ -36,7 +36,7 @@ object DataBase {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_USERS_COLLECTION)
             .document(uid)
-            .set(hashMapOf("name" to name, "phone" to phone))
+            .set(hashMapOf(ApiUtils.API_NAME_FIELD to name, ApiUtils.API_PHONE_FIELD to phone))
             .addOnSuccessListener {
                 listener.onSuccess()
             }
@@ -71,10 +71,10 @@ object DataBase {
                 listener.onFail(it)
             }
     }
-    fun downloadUserMarkets(ids: List<String>, listener: OnCollectionDownloadCompleteListener){
+    fun downloadMarketsWithIds(ids: List<String>, listener: OnCollectionDownloadCompleteListener){
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_MARKETS_COLLECTION)
-            .whereIn("id", ids)
+            .whereIn(ApiUtils.API_ID_FIELD, ids)
             .get()
             .addOnSuccessListener {
                 listener.onSuccess(it)

@@ -28,7 +28,6 @@
         android:gravity="center"
         style="@style/TextAppearance.Material3.BodyMedium"/>
     <ImageView
-        app:tint="?attr/colorPrimary"
         android:padding="16dp"
         android:layout_marginHorizontal="16dp"
         android:id="@+id/bottomSheetQrView"

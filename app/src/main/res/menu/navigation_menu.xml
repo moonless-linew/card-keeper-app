@@ -7,10 +7,6 @@
             android:icon="@drawable/ic_baseline_person_24"
             android:title="@string/user" />
         <item
-            android:id="@+id/favoritesFragment"
-            android:icon="@drawable/ic_baseline_star_24"
-            android:title="@string/favorites"/>
-        <item
             android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_baseline_settings_24"
             android:title="@string/settings"/>
@@ -23,10 +19,6 @@
             android:id="@+id/shareFragment"
             android:icon="@drawable/ic_baseline_share_24"
             android:title="@string/share_app"/>
-        <item
-            android:id="@+id/helperFragment"
-            android:icon="@drawable/ic_baseline_help_24"
-            android:title="@string/how_to_use"/>
         <item
             android:id="@+id/descriptionFragment"
             android:icon="@drawable/ic_baseline_info_24"

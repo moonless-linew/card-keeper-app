@@ -45,7 +45,7 @@ class CardsFragmentViewModel : ViewModel() {
                 it1.add(it.marketID.toString())
             }
         }
-        DataBase.downloadUserMarkets(ids.toList(), object : OnCollectionDownloadCompleteListener{
+        DataBase.downloadMarketsWithIds(ids.toList(), object : OnCollectionDownloadCompleteListener{
             override fun onSuccess(documents: QuerySnapshot) {
                 marketsData = documents.toObjects(Market::class.java)
                 for ( i in cardsData.indices){

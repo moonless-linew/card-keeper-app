@@ -29,6 +29,7 @@ class NameFragment : Fragment(R.layout.fragment_name) {
                 phoneAuth()
             }
         }
+ 
         setupAuthStatusObserver()
         super.onViewCreated(view, savedInstanceState)
     }
