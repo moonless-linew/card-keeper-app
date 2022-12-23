@@ -2,9 +2,9 @@ package com.example.cardapp.database
 
 import androidx.fragment.app.FragmentActivity
 import com.example.cardapp.interfaces.OnCollectionDownloadCompleteListener
+
 import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
-import com.example.cardapp.models.Card
-import com.example.cardapp.models.User
+
 import com.example.cardapp.utils.ApiUtils
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
@@ -36,7 +36,7 @@ object DataBase {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_USERS_COLLECTION)
             .document(uid)
-            .set(User(name, phone, listOf(Card())))
+            .set(hashMapOf("name" to name, "phone" to phone))
             .addOnSuccessListener {
                 listener.onSuccess()
             }
@@ -68,6 +68,18 @@ object DataBase {
                 listener.onSuccess(it)
             }
             .addOnFailureListener {
+                listener.onFail(it)
+            }
+    }
+    fun downloadUserMarkets(ids: List<String>, listener: OnCollectionDownloadCompleteListener){
+        FirebaseFirestore.getInstance()
+            .collection(ApiUtils.API_MARKETS_COLLECTION)
+            .whereIn("id", ids)
+            .get()
+            .addOnSuccessListener {
+                listener.onSuccess(it)
+            }
+            .addOnFailureListener{
                 listener.onFail(it)
             }
     }

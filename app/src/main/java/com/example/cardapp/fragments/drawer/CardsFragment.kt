@@ -12,7 +12,6 @@ import com.example.cardapp.adapters.CardsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentCardsBinding
 import com.example.cardapp.extensions.navigateSafely
 import com.example.cardapp.interfaces.CardCallback
-import com.example.cardapp.models.Card
 import com.example.cardapp.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.viewmodels.status.CardDataStatus
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -25,7 +24,10 @@ class CardsFragment : Fragment() {
         get() = _binding!!
     private val viewModel: CardsFragmentViewModel by viewModels()
     private val cardCallback: CardCallback = CardCallback {
-        BottomSheetBehavior.from(binding.sheetCard.bottomSheet).state =
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.sheetCard.bottomSheet)
+        binding.sheetCard.bottomSheetCardId.text = it.id
+        binding.sheetCard.bottomSheetMarketName.text = it.market?.name
+        bottomSheetBehavior.state =
             BottomSheetBehavior.STATE_EXPANDED
     }
 
@@ -66,13 +68,13 @@ class CardsFragment : Fragment() {
     }
 
     private fun downloadData() {
+        viewModel.downloadUserCards(Firebase.auth.uid!!)
         startLoading()
 
     }
 
     private fun startLoading() {
         binding.cardsRecycler.showShimmerAdapter()
-        viewModel.downloadData(Firebase.auth.uid!!)
     }
 
     private fun stopLoading() {
