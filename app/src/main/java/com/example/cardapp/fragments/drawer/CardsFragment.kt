@@ -1,6 +1,7 @@
 package com.example.cardapp.fragments.drawer
 
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +14,13 @@ import com.example.cardapp.R
 
 import com.example.cardapp.adapters.CardsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentCardsBinding
+import com.example.cardapp.databinding.SheetCardBinding
 import com.example.cardapp.extensions.navigateSafely
 import com.example.cardapp.interfaces.CardCallback
 import com.example.cardapp.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.viewmodels.status.CardDataStatus
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.zxing.BarcodeFormat
@@ -30,15 +33,18 @@ class CardsFragment : Fragment() {
         get() = _binding!!
     private val viewModel: CardsFragmentViewModel by viewModels()
     private val cardCallback: CardCallback = CardCallback {
-        val bottomSheetBehavior = BottomSheetBehavior.from(binding.sheetCard.bottomSheet)
-        binding.sheetCard.bottomSheetCardId.text = it.id
-        binding.sheetCard.bottomSheetMarketName.text = it.market?.name
-//        val barcodeEncoder = BarcodeEncoder()
-//        val bitmap = barcodeEncoder.encodeBitmap(it.id, BarcodeFormat.QR_CODE, 100, 100)
-//        val imageViewQrCode = binding.sheetCard.bottomSheetQrView
-//        imageViewQrCode.setImageBitmap(bitmap)
-        bottomSheetBehavior.state =
-            BottomSheetBehavior.STATE_EXPANDED
+        BottomSheetDialog(requireActivity()).also { dialog ->
+            val dialogBinding: SheetCardBinding = SheetCardBinding.inflate(layoutInflater)
+            dialogBinding.bottomSheetCardId.text = it.id
+            dialogBinding.bottomSheetMarketName.text = it.market?.name
+            dialogBinding.bottomSheetQrView.also { image ->
+                image.setImageBitmap(generateQRCodeBitmap(it.id ?: "0", BarcodeFormat.valueOf(it.codeType ?: "QR_CODE")))
+            }
+            dialog.setContentView(dialogBinding.root)
+            dialog.show()
+        }
+
+
     }
 
     override fun onCreateView(
@@ -90,6 +96,14 @@ class CardsFragment : Fragment() {
     private fun stopLoading() {
         binding.cardsRecycler.hideShimmerAdapter()
     }
+    private fun generateQRCodeBitmap(id: String, format: BarcodeFormat): Bitmap {
+        BarcodeEncoder().also {
+            return it.encodeBitmap(id, format, 200, 200)
+        }
+    }
+
+
+
 
     override fun onDestroy() {
         super.onDestroy()

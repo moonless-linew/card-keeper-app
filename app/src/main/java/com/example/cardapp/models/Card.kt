@@ -1,14 +1,12 @@
 package com.example.cardapp.models
 
+import com.google.zxing.BarcodeFormat
+
 
 class Card(){
-    constructor(id: String?, marketID: String?): this(){
-        this.id = id
-        this.marketID = marketID
-    }
     var id: String? = null
     var marketID: String? = null
-
-
     var market: Market? = null
+    var codeType: String? = null
+
 }
