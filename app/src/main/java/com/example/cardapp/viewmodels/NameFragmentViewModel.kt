@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cardapp.database.DataBase
-import com.example.cardapp.viewmodels.status.NameAuthStatus
 import com.example.cardapp.interfaces.OnCompleteListener
+import com.example.cardapp.viewmodels.status.NameAuthStatus
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

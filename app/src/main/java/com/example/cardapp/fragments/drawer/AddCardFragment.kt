@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.cardapp.databinding.FragmentAddCardBinding
-import com.example.cardapp.databinding.FragmentCardsBinding
-import com.example.cardapp.databinding.FragmentSignBinding
 
 class AddCardFragment: Fragment() {
     private var _binding: FragmentAddCardBinding? = null
@@ -18,7 +16,7 @@ class AddCardFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddCardBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

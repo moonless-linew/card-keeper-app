@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cardapp.database.DataBase
-import com.example.cardapp.viewmodels.status.PhoneAuthStatus
-import com.example.cardapp.viewmodels.status.SmsStatus
 import com.example.cardapp.interfaces.OnCompleteListener
 import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
+import com.example.cardapp.viewmodels.status.PhoneAuthStatus
+import com.example.cardapp.viewmodels.status.SmsStatus
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.PhoneAuthCredential

@@ -10,8 +10,8 @@ import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentNameBinding
 import com.example.cardapp.extensions.activityNavController
 import com.example.cardapp.extensions.navigateSafely
-import com.example.cardapp.viewmodels.status.NameAuthStatus
 import com.example.cardapp.viewmodels.NameFragmentViewModel
+import com.example.cardapp.viewmodels.status.NameAuthStatus
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

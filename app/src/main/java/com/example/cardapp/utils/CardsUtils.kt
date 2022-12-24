@@ -1,7 +1,7 @@
 package com.example.cardapp.utils
 
-import com.example.cardapp.models.Card
 
 object CardsUtils {
-    val CARDS_ARRAY_FIELD = "cards"
+    val DEFAULT_ID = "1111"
+    val DEFAULT_FORMAT = "QR_CODE"
     }

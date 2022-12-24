@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,9 +17,10 @@ import com.example.cardapp.databinding.FragmentCardsBinding
 import com.example.cardapp.databinding.SheetCardBinding
 import com.example.cardapp.extensions.navigateSafely
 import com.example.cardapp.interfaces.CardCallback
+import com.example.cardapp.utils.CardsUtils
 import com.example.cardapp.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.viewmodels.status.CardDataStatus
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -38,7 +39,8 @@ class CardsFragment : Fragment() {
             dialogBinding.bottomSheetCardId.text = it.id
             dialogBinding.bottomSheetMarketName.text = it.market?.name
             dialogBinding.bottomSheetQrView.also { image ->
-                image.setImageBitmap(generateQRCodeBitmap(it.id ?: "0", BarcodeFormat.valueOf(it.codeType ?: "QR_CODE")))
+                image.setImageBitmap(generateQRCodeBitmap(it.id ?: CardsUtils.DEFAULT_ID,
+                    BarcodeFormat.valueOf(it.codeType ?: CardsUtils.DEFAULT_FORMAT)))
             }
             dialog.setContentView(dialogBinding.root)
             dialog.show()
@@ -96,13 +98,12 @@ class CardsFragment : Fragment() {
     private fun stopLoading() {
         binding.cardsRecycler.hideShimmerAdapter()
     }
+
     private fun generateQRCodeBitmap(id: String, format: BarcodeFormat): Bitmap {
         BarcodeEncoder().also {
             return it.encodeBitmap(id, format, 200, 200)
         }
     }
-
-
 
 
     override fun onDestroy() {

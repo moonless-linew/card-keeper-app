@@ -1,7 +1,5 @@
 package com.example.cardapp.models
 
-import com.google.zxing.BarcodeFormat
-
 
 class Card(){
     var id: String? = null
