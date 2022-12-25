@@ -29,8 +29,9 @@ class MainFlowFragment : ParentFlowFragment(
         hideKeyBoard()
         viewModel.downloadUser(Firebase.auth.uid.toString())
         binding.navigationView.setupWithNavController(navController)
-        val appBarConfiguration = AppBarConfiguration(navController.graph, binding.root)
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        AppBarConfiguration(navController.graph, binding.root).also {
+            binding.toolbar.setupWithNavController(navController, it)
+        }
         binding.navigationView.also {
             it.inflateHeaderView(R.layout.header_drawer)
             it.setupWithNavController(navController)
