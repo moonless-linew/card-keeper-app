@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentPhoneBinding
 import com.example.cardapp.extensions.navigateSafely
@@ -21,25 +22,17 @@ import ru.tinkoff.decoro.watchers.FormatWatcher
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 
-class PhoneFragment : Fragment() {
+class PhoneFragment : Fragment(R.layout.fragment_phone) {
     private val viewModel: PhoneSmsFragmentViewModel by activityViewModels()
-    private var _binding: FragmentPhoneBinding? = null
-    private val binding
-        get() = _binding!!
+    private val binding by viewBinding(FragmentPhoneBinding::bind)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentPhoneBinding.inflate(layoutInflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         toastError("Phone auth may work unpredictable")
         setupClickContinue()
         setupEditPhone()
         setupSmsStatusObserver()
-        return binding.root
+        super.onViewCreated(view, savedInstanceState)
     }
-
 
     private fun setupClickContinue() {
         binding.phoneContinueButton.setOnClickListener {
@@ -91,8 +84,4 @@ class PhoneFragment : Fragment() {
 
     private fun checkPhoneLength() = binding.editPhone.text?.length ?: 0
 
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
-    }
 }

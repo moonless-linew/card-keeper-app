@@ -7,26 +7,38 @@
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.cardapp.fragments.drawer.UserFragment"
-        android:label="UserFragment" />
+        android:label="@string/account" />
     <fragment
         android:id="@+id/cardsFragment"
         android:name="com.example.cardapp.fragments.drawer.CardsFragment"
         android:label="@string/your_cards" >
         <action
-            android:id="@+id/action_cardsFragment_to_addCardFragment"
-            app:destination="@id/addCardFragment" />
+            android:id="@+id/action_cardsFragment_to_searchMarketFragment"
+            app:destination="@id/searchMarketFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.cardapp.fragments.drawer.DescriptionFragment"
-        android:label="About CardApp" />
+        android:label="@string/about_card_app" />
     <fragment
         android:id="@+id/addCardFragment"
         android:name="com.example.cardapp.fragments.drawer.AddCardFragment"
-        android:label="AddCardFragment" />
+        android:label="@string/add_new_card" >
+        <action
+            android:id="@+id/action_addCardFragment_to_cardsFragment"
+            app:destination="@id/cardsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.cardapp.fragments.drawer.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="@string/settings"/>
+    <fragment
+        android:id="@+id/searchMarketFragment"
+        android:name="com.example.cardapp.fragments.drawer.SearchMarketFragment"
+        android:label="SearchMarketFragment" >
+        <action
+            android:id="@+id/action_searchMarketFragment_to_addCardFragment"
+            app:destination="@id/addCardFragment" />
+    </fragment>
 
 </navigation>

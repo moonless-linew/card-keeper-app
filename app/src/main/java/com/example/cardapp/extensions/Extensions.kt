@@ -1,6 +1,8 @@
 package com.example.cardapp.extensions
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -19,3 +21,5 @@ fun String.toPhoneStandard() = this.replace("[()-]".toRegex(), "")
 fun NavController.navigateSafelyBundle(@IdRes actionId: Int, args: Bundle) {
     currentDestination?.getAction(actionId)?.let { navigate(actionId, args) }
 }
+
+

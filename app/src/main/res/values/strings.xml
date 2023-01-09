@@ -36,7 +36,7 @@
     <string name="add_description">add new card</string>
     <string name="disk_link">Download the coolest app in the World!!\n https://disk.yandex.ru/d/uasodtkR8Olhhw</string>
     <string name="image_of_store">image of store</string>
-    <string name="search">Search shop</string>
+    <string name="searchShop">Search shop</string>
     <string name="nothing_to_show">Nothing to show :)</string>
     <string name="label" translatable="false">Developed by Anton Vorobyev \n Special for Alfa-Bank</string>
     <string name="qr_code_of_your_card">qr code of your card</string>
@@ -44,4 +44,20 @@
     <string name="test_id">id: 1324 1234 1231 1234</string>
     <string name="app_icon">app icon</string>
     <string name="scan_card">Scan card</string>
+    <string name="enter_id">Enter ID</string>
+    <string name="done">Done</string>
+    <string name="add_new_card">Add new card</string>
+    <string name="about_card_app">About CardApp</string>
+    <string name="account">Account</string>
+    <string name="functional">Functional</string>
+    <string name="do_whatever">Do whatever you want</string>
+    <string name="easy_to_use">Easy to use</string>
+    <string name="show_this_app_your_grandmother">Show this app your grandmother</string>
+    <string name="smart">Smart</string>
+    <string name="gps_feature">Can choose card, using GPS</string>
+    <string name="fast">Fast</string>
+    <string name="made_with_love">Made with love</string>
+    <string name="pref_notifications">Enable message notifications</string>
+    <string name="send_feedback">Send feedback</string>
+    <string name="report">Report bugs</string>
 </resources>

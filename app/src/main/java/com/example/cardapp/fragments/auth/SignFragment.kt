@@ -45,7 +45,7 @@ class SignFragment : Fragment() {
         binding.viewPager2.also {
             it.adapter = IntroductionViewPagerAdapter(
                 this,
-                SlidesUtils.SLIDES
+                SlidesUtils.getSlides(requireContext())
             )
             binding.tabDots.attachTo(it)
         }

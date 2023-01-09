@@ -83,6 +83,17 @@ object DataBase {
                 listener.onFail(it)
             }
     }
+    fun downloadMarkets(listener: OnCollectionDownloadCompleteListener){
+        FirebaseFirestore.getInstance()
+            .collection(ApiUtils.API_MARKETS_COLLECTION)
+            .get()
+            .addOnSuccessListener {
+                listener.onSuccess(it)
+            }
+            .addOnFailureListener{
+                listener.onFail(it)
+            }
+    }
 
 
     fun initPhoneAuth(
