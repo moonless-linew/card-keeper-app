@@ -26,7 +26,10 @@
         android:label="@string/add_new_card" >
         <action
             android:id="@+id/action_addCardFragment_to_cardsFragment"
-            app:destination="@id/cardsFragment" />
+            app:destination="@id/cardsFragment"
+            app:popUpTo="@id/cardsFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

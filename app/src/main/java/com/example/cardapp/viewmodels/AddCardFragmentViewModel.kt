@@ -73,5 +73,10 @@ class AddCardFragmentViewModel: ViewModel() {
         _chosenCard.postValue(_chosenCard.value)
     }
 
+    fun reset() {
+        _chosenCard.value = Card()
+        _cardUploadingStatus.value = CardUploadStatus.Null
+    }
+
 
 }

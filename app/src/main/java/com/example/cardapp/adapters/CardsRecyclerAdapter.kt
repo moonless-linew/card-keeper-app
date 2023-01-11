@@ -23,7 +23,8 @@ class CardsRecyclerAdapter(val data: List<Card>, val callback: (market: Card) ->
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.binding.descriptionTextView.text = data[position].id
+        holder.binding.cardID.text = data[position].id
+        holder.binding.marketName.text = data[position].market?.name
         holder.binding.root.setOnClickListener { callback(data[position]) }
     }
 

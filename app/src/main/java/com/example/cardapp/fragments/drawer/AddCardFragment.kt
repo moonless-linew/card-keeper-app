@@ -91,8 +91,10 @@ class AddCardFragment: Fragment() {
                 CardUploadStatus.Fail -> toastError(getString(R.string.error))
                 CardUploadStatus.Success -> {
                     findNavController().navigateSafely(R.id.action_addCardFragment_to_cardsFragment)
+                    viewModel.reset()
                     stopLoading()
                 }
+                CardUploadStatus.Null -> {} //nothing
             }
         }
     }
