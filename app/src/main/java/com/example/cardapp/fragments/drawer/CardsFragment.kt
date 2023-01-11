@@ -1,40 +1,31 @@
 package com.example.cardapp.fragments.drawer
 
 
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cardapp.R
-
 import com.example.cardapp.adapters.CardsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentCardsBinding
-import com.example.cardapp.databinding.FragmentMainBinding
 import com.example.cardapp.databinding.SheetCardBinding
 import com.example.cardapp.extensions.navigateSafely
-import com.example.cardapp.interfaces.CardCallback
+import com.example.cardapp.models.Card
 import com.example.cardapp.utils.CardsUtils
 import com.example.cardapp.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.viewmodels.status.CardDataStatus
-
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.zxing.BarcodeFormat
-import com.journeyapps.barcodescanner.BarcodeEncoder
 
 
 class CardsFragment : Fragment(R.layout.fragment_cards) {
     private val binding by viewBinding(FragmentCardsBinding::bind)
     private val viewModel: CardsFragmentViewModel by viewModels()
-    private val cardCallback: CardCallback = CardCallback {
+    private val cardCallback: (card: Card) -> Unit =  {
         BottomSheetDialog(requireActivity()).also { dialog ->
             val dialogBinding: SheetCardBinding = SheetCardBinding.inflate(layoutInflater)
             dialogBinding.bottomSheetCardId.text = it.id

@@ -5,14 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cardapp.R
-import com.example.cardapp.adapters.CardsRecyclerAdapter
 import com.example.cardapp.adapters.MarketsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentMarketSearchBinding
-import com.example.cardapp.databinding.FragmentSignBinding
 import com.example.cardapp.extensions.navigateSafely
 import com.example.cardapp.models.Market
 import com.example.cardapp.viewmodels.AddCardFragmentViewModel
@@ -23,7 +20,7 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
     private val binding by viewBinding(FragmentMarketSearchBinding::bind)
     private val viewModel: AddCardFragmentViewModel by activityViewModels()
     private val callback: (market: Market) -> Unit = {
-        viewModel.chosenMarket = it
+        viewModel.setMarket(it)
         findNavController().navigateSafely(R.id.action_searchMarketFragment_to_addCardFragment)
     }
 
@@ -53,16 +50,13 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
 
     }
 
-    private fun toastError(msg: String) {
+    private fun toastError(msg: String) =
         Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
-    }
 
-    private fun startLoading() {
-        binding.marketsRecycler.showShimmerAdapter()
-    }
 
-    private fun stopLoading() {
-        binding.marketsRecycler.hideShimmerAdapter()
-    }
+    private fun startLoading() = binding.marketsRecycler.showShimmerAdapter()
+
+    private fun stopLoading() = binding.marketsRecycler.hideShimmerAdapter()
+
 
 }

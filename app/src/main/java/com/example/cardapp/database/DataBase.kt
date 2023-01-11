@@ -2,8 +2,10 @@ package com.example.cardapp.database
 
 import androidx.fragment.app.FragmentActivity
 import com.example.cardapp.interfaces.OnCollectionDownloadCompleteListener
+import com.example.cardapp.interfaces.OnCompleteListener
 
 import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
+import com.example.cardapp.models.Card
 
 import com.example.cardapp.utils.ApiUtils
 import com.google.firebase.auth.PhoneAuthCredential
@@ -16,23 +18,31 @@ import java.util.concurrent.TimeUnit
 
 object DataBase {
 
-    fun loginUserWithName(listener: com.example.cardapp.interfaces.OnCompleteListener){
-        Firebase.auth.signInAnonymously().addOnSuccessListener{
+    fun loginUserWithName(listener: OnCompleteListener) {
+        Firebase.auth.signInAnonymously().addOnSuccessListener {
             listener.onSuccess()
-        }.addOnFailureListener{
+        }.addOnFailureListener {
             listener.onFail()
         }
     }
 
-    fun loginUserWithPhone(credential: PhoneAuthCredential, listener: com.example.cardapp.interfaces.OnCompleteListener) {
+    fun loginUserWithPhone(
+        credential: PhoneAuthCredential,
+        listener: OnCompleteListener,
+    ) {
         Firebase.auth.signInWithCredential(credential).addOnSuccessListener {
             listener.onSuccess()
-        }.addOnFailureListener{
+        }.addOnFailureListener {
             listener.onFail()
         }
     }
 
-    fun createUser(uid: String, name: String?, phone: String?, listener: com.example.cardapp.interfaces.OnCompleteListener) {
+    fun createUser(
+        uid: String,
+        name: String?,
+        phone: String?,
+        listener: OnCompleteListener,
+    ) {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_USERS_COLLECTION)
             .document(uid)
@@ -40,7 +50,7 @@ object DataBase {
             .addOnSuccessListener {
                 listener.onSuccess()
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 listener.onFail()
             }
     }
@@ -58,6 +68,16 @@ object DataBase {
             }
     }
 
+    fun uploadCard(uid: String, card: Card, listener: OnCompleteListener) {
+        FirebaseFirestore.getInstance()
+            .collection(ApiUtils.API_USERS_COLLECTION)
+            .document(uid)
+            .collection(ApiUtils.API_CARDS_COLLECTION)
+            .add(card)
+            .addOnSuccessListener { listener.onSuccess() }
+            .addOnFailureListener { listener.onFail() }
+    }
+
     fun downloadUserCards(uid: String, listener: OnCollectionDownloadCompleteListener) {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_USERS_COLLECTION)
@@ -71,7 +91,8 @@ object DataBase {
                 listener.onFail(it)
             }
     }
-    fun downloadMarketsWithIds(ids: List<String>, listener: OnCollectionDownloadCompleteListener){
+
+    fun downloadMarketsWithIds(ids: List<String>, listener: OnCollectionDownloadCompleteListener) {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_MARKETS_COLLECTION)
             .whereIn(ApiUtils.API_ID_FIELD, ids)
@@ -79,18 +100,19 @@ object DataBase {
             .addOnSuccessListener {
                 listener.onSuccess(it)
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 listener.onFail(it)
             }
     }
-    fun downloadMarkets(listener: OnCollectionDownloadCompleteListener){
+
+    fun downloadMarkets(listener: OnCollectionDownloadCompleteListener) {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_MARKETS_COLLECTION)
             .get()
             .addOnSuccessListener {
                 listener.onSuccess(it)
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 listener.onFail(it)
             }
     }
@@ -99,7 +121,7 @@ object DataBase {
     fun initPhoneAuth(
         phone: String,
         activity: FragmentActivity,
-        callback: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+        callback: PhoneAuthProvider.OnVerificationStateChangedCallbacks,
     ) {
         val options = PhoneAuthOptions.newBuilder(Firebase.auth)
             .setPhoneNumber(phone)

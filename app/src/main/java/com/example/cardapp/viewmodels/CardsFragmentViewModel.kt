@@ -1,7 +1,6 @@
 package com.example.cardapp.viewmodels
 
 import android.graphics.Bitmap
-import androidx.core.graphics.scale
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +13,6 @@ import com.example.cardapp.viewmodels.status.CardDataStatus
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import com.journeyapps.barcodescanner.BarcodeView
 
 
 class CardsFragmentViewModel : ViewModel() {

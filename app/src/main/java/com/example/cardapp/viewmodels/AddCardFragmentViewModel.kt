@@ -5,10 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cardapp.database.DataBase
 import com.example.cardapp.interfaces.OnCollectionDownloadCompleteListener
+import com.example.cardapp.interfaces.OnCompleteListener
+import com.example.cardapp.models.Card
 import com.example.cardapp.models.Market
+import com.example.cardapp.viewmodels.status.CardUploadStatus
 import com.example.cardapp.viewmodels.status.MarketDataStatus
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.QuerySnapshot
-import java.lang.Exception
+import com.google.firebase.ktx.Firebase
 
 class AddCardFragmentViewModel: ViewModel() {
 
@@ -19,7 +23,13 @@ class AddCardFragmentViewModel: ViewModel() {
     val marketsDataStatus: LiveData<MarketDataStatus>
     get() = _marketsDataStatus
 
-    var chosenMarket: Market? = null
+    var _chosenCard = MutableLiveData<Card>()
+    val chosenCard: LiveData<Card>
+        get() = _chosenCard
+
+    var _cardUploadingStatus = MutableLiveData<CardUploadStatus>()
+    val cardUploadingStatus: LiveData<CardUploadStatus>
+        get() = _cardUploadingStatus
 
     fun downloadMarkets() {
         DataBase.downloadMarkets(object: OnCollectionDownloadCompleteListener{
@@ -34,5 +44,34 @@ class AddCardFragmentViewModel: ViewModel() {
 
         })
     }
+
+    fun uploadCard(){
+        DataBase.uploadCard(Firebase.auth.uid!!, _chosenCard.value ?: Card(), object: OnCompleteListener{
+            override fun onSuccess() {
+                _cardUploadingStatus.postValue(CardUploadStatus.Success)
+            }
+
+            override fun onFail() {
+                _cardUploadingStatus.postValue(CardUploadStatus.Fail)
+            }
+
+        })
+    }
+
+    fun setMarket(market: Market){
+        _chosenCard.postValue(Card().also{
+            it.market = market
+            it.marketID = market.id
+        })
+    }
+    fun setCardCodeType(codeType: String?){
+        _chosenCard.value?.codeType = codeType
+        _chosenCard.postValue(_chosenCard.value)
+    }
+    fun setCardID(id: String){
+        _chosenCard.value?.id = id
+        _chosenCard.postValue(_chosenCard.value)
+    }
+
 
 }

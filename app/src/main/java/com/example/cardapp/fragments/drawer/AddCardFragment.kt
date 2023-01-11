@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentAddCardBinding
 import com.example.cardapp.extensions.navigateSafely
 import com.example.cardapp.viewmodels.AddCardFragmentViewModel
+import com.example.cardapp.viewmodels.status.CardUploadStatus
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 
@@ -22,6 +24,7 @@ class AddCardFragment: Fragment() {
     private val viewModel: AddCardFragmentViewModel by activityViewModels()
     private val barcodeScanLauncher = registerForActivityResult(ScanContract()) {
         binding.textEnterID.editText?.setText(it.contents)
+        viewModel.setCardCodeType(it.formatName)
     }
 
     override fun onCreateView(
@@ -32,23 +35,70 @@ class AddCardFragment: Fragment() {
         _binding = FragmentAddCardBinding.inflate(layoutInflater, container, false)
         setupTextInputs()
         setupDoneButton()
-        Toast.makeText(requireContext(), viewModel.chosenMarket?.name, Toast.LENGTH_SHORT).show()
+        setupCardDataObserver()
+        setupCardUploadObserver()
         return binding.root
     }
 
     private fun setupTextInputs(){
-        binding.textEnterID.setEndIconOnClickListener {
-            barcodeScanLauncher.launch(ScanOptions().also {
-                it.setOrientationLocked(true)
-                it.setBarcodeImageEnabled(true)
-                it.setPrompt(getString(R.string.scan_card))
-            })
+        binding.textEnterID.run{
+            setEndIconOnClickListener {
+                barcodeScanLauncher.launch(ScanOptions().also {
+                    it.setOrientationLocked(true)
+                    it.setBarcodeImageEnabled(true)
+                    it.setPrompt(getString(R.string.scan_card))
+                })
+            }
+            editText?.addTextChangedListener {
+                viewModel.setCardID(it.toString())
+            }
+
         }
+
+
     }
     private fun setupDoneButton(){
         binding.doneButton.setOnClickListener {
-            findNavController().navigateSafely(R.id.action_addCardFragment_to_cardsFragment)
+           uploadCard()
         }
     }
+
+    private fun uploadCard() {
+        viewModel.uploadCard()
+        startLoading()
+    }
+
+    private fun startLoading(){
+        binding.progressBar.visibility = View.VISIBLE
+        binding.doneButton.visibility = View.INVISIBLE
+    }
+    private fun stopLoading(){
+        binding.progressBar.visibility = View.INVISIBLE
+        binding.doneButton.visibility = View.VISIBLE
+    }
+
+
+    private fun setupCardDataObserver(){
+        viewModel.chosenCard.observe(viewLifecycleOwner) {
+            binding.cardID.text = it.id
+            binding.marketName.text = viewModel.chosenCard.value?.market?.name
+        }
+    }
+
+    private fun setupCardUploadObserver(){
+        viewModel.cardUploadingStatus.observe(viewLifecycleOwner) {
+            when(it){
+                CardUploadStatus.Fail -> toastError(getString(R.string.error))
+                CardUploadStatus.Success -> {
+                    findNavController().navigateSafely(R.id.action_addCardFragment_to_cardsFragment)
+                    stopLoading()
+                }
+            }
+        }
+    }
+
+    private fun toastError(msg: String) =
+        Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
+
 
 }
