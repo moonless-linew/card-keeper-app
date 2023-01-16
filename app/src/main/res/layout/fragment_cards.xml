@@ -6,17 +6,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
-        android:id="@+id/cardsRecycler"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:shimmer_demo_angle="35"
-        app:shimmer_demo_duration="@integer/material_motion_duration_long_2"
-        app:shimmer_demo_layout="@layout/item_card"
-        app:shimmer_demo_layout_manager_type="linear_vertical"
-        tools:listitem="@layout/item_card" />
+        android:layout_height="match_parent">
+        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+            android:id="@+id/cardsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:shimmer_demo_angle="35"
+            app:shimmer_demo_duration="@integer/material_motion_duration_long_2"
+            app:shimmer_demo_layout="@layout/item_card"
+            app:shimmer_demo_layout_manager_type="linear_vertical"
+            tools:listitem="@layout/item_card" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textNothingToShow"

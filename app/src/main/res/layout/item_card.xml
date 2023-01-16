@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/CardView"
     app:cardCornerRadius="10dp"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="200dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="16dp"
     >
@@ -13,17 +14,18 @@
         android:id="@+id/RelativeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/iconCard"
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:contentDescription="@string/image_of_store"
-            />
+            android:contentDescription="@string/image_of_store" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/marketName"
@@ -34,7 +36,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="12dp"
             android:minHeight="46dp"
-            android:text="" />
+             />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/cardID"
@@ -47,7 +49,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="24dp"
             android:minHeight="24dp"
-            android:text="" />
+             />
+
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

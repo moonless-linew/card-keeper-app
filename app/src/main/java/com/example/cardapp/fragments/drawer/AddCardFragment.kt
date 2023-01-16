@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.cardapp.R
 import com.example.cardapp.databinding.FragmentAddCardBinding
 import com.example.cardapp.extensions.navigateSafely
+import com.example.cardapp.utils.CardsUtils
 import com.example.cardapp.viewmodels.AddCardFragmentViewModel
 import com.example.cardapp.viewmodels.status.CardUploadStatus
 import com.journeyapps.barcodescanner.ScanContract
@@ -59,7 +60,10 @@ class AddCardFragment: Fragment() {
     }
     private fun setupDoneButton(){
         binding.doneButton.setOnClickListener {
-           uploadCard()
+            if(binding.cardID.text.length < CardsUtils.MIN_ID_LENGTH)
+                toastError(getString(R.string.small_id))
+            else uploadCard()
+
         }
     }
 

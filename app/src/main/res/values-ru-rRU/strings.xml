@@ -41,4 +41,20 @@
     <string name="scan_card">Сканировать карту</string>
     <string name="qr_code_of_your_card">Штрих-код вашей карты</string>
     <string name="app_icon">Картинка приложения</string>
+    <string name="enter_id">Введите номер</string>
+    <string name="done">Добавить</string>
+    <string name="add_new_card">Добавить карту</string>
+    <string name="about_card_app">О CardApp</string>
+    <string name="account">Аккаунт</string>
+    <string name="functional">Много функций</string>
+    <string name="do_whatever">Делайте что хотите</string>
+    <string name="easy_to_use">Легко пользоваться</string>
+    <string name="show_this_app_your_grandmother">Покажите это приложение вашей бабушке</string>
+    <string name="smart">Умное</string>
+    <string name="gps_feature">Может выбирать карту по GPS</string>
+    <string name="fast">Быстрое</string>
+    <string name="made_with_love">Сделано с любовью</string>
+    <string name="pref_notifications">Включить уведомления</string>
+    <string name="send_feedback">Отправить отзыв</string>
+    <string name="report">Наругать разработчика</string>
 </resources>
