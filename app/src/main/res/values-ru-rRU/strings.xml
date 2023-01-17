@@ -23,7 +23,7 @@
     <string name="error">Что-то пошло не так</string>
     <string name="internet_error">А интернета нет!</string>
     <string name="what_is_your_phone_number">Какой у вас номер телефона?</string>
-    <string name="your_cards">Ваши карты</string>
+    <string name="your_cards">Карты</string>
     <string name="image_of_feature">Картинка фишки</string>
     <string name="name_error">Имя должно быть не пустым и меньше 30</string>
     <string name="your_phone_number">Ваш номер телефона</string>

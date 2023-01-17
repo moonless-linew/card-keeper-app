@@ -29,6 +29,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/marketName"
+            android:textColor="@color/white"
             style="@style/TextAppearance.Material3.HeadlineLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/cardID"
+            android:textColor="@color/white"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

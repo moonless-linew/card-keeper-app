@@ -1,5 +1,7 @@
 package com.example.cardapp.adapters
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,8 +33,12 @@ class CardsRecyclerAdapter(val data: List<Card>, val callback: CardCallback) : A
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.binding.cardID.text = data[position].id
         holder.binding.marketName.text = data[position].market?.name
-        holder.binding.root.setOnClickListener { callback.onClick(data[position]) }
+        holder.binding.RelativeView.setBackgroundColor(Color.parseColor(data[position].market?.color))
 
+        holder.binding.root.setOnClickListener {
+            callback.onClick(data[position])
+
+        }
     }
 
     override fun getItemCount(): Int {

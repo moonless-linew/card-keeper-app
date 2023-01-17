@@ -1,5 +1,6 @@
 package com.example.cardapp.fragments.drawer
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,7 @@ import com.example.cardapp.viewmodels.status.CardUploadStatus
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 
-class AddCardFragment: Fragment() {
+class AddCardFragment : Fragment() {
     private var _binding: FragmentAddCardBinding? = null
     private val binding
         get() = _binding!!
@@ -31,18 +32,19 @@ class AddCardFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentAddCardBinding.inflate(layoutInflater, container, false)
         setupTextInputs()
         setupDoneButton()
         setupCardDataObserver()
         setupCardUploadObserver()
+        binding.RelativeView.setBackgroundColor(Color.parseColor(viewModel.chosenCard.value?.market?.color))
         return binding.root
     }
 
-    private fun setupTextInputs(){
-        binding.textEnterID.run{
+    private fun setupTextInputs() {
+        binding.textEnterID.run {
             setEndIconOnClickListener {
                 barcodeScanLauncher.launch(ScanOptions().also {
                     it.setOrientationLocked(true)
@@ -58,9 +60,10 @@ class AddCardFragment: Fragment() {
 
 
     }
-    private fun setupDoneButton(){
+
+    private fun setupDoneButton() {
         binding.doneButton.setOnClickListener {
-            if(binding.cardID.text.length < CardsUtils.MIN_ID_LENGTH)
+            if (binding.cardID.text.length < CardsUtils.MIN_ID_LENGTH)
                 toastError(getString(R.string.small_id))
             else uploadCard()
 
@@ -72,26 +75,27 @@ class AddCardFragment: Fragment() {
         startLoading()
     }
 
-    private fun startLoading(){
+    private fun startLoading() {
         binding.progressBar.visibility = View.VISIBLE
         binding.doneButton.visibility = View.INVISIBLE
     }
-    private fun stopLoading(){
+
+    private fun stopLoading() {
         binding.progressBar.visibility = View.INVISIBLE
         binding.doneButton.visibility = View.VISIBLE
     }
 
 
-    private fun setupCardDataObserver(){
+    private fun setupCardDataObserver() {
         viewModel.chosenCard.observe(viewLifecycleOwner) {
             binding.cardID.text = it.id
             binding.marketName.text = viewModel.chosenCard.value?.market?.name
         }
     }
 
-    private fun setupCardUploadObserver(){
+    private fun setupCardUploadObserver() {
         viewModel.cardUploadingStatus.observe(viewLifecycleOwner) {
-            when(it){
+            when (it) {
                 CardUploadStatus.Fail -> toastError(getString(R.string.error))
                 CardUploadStatus.Success -> {
                     findNavController().navigateSafely(R.id.action_addCardFragment_to_cardsFragment)
