@@ -1,15 +1,18 @@
 package com.example.cardapp.viewmodels
 
 import android.graphics.Bitmap
+import android.provider.ContactsContract.Data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cardapp.database.DataBase
 import com.example.cardapp.interfaces.OnCollectionDownloadCompleteListener
+import com.example.cardapp.interfaces.OnCompleteListener
 import com.example.cardapp.models.Card
 import com.example.cardapp.models.Market
 import com.example.cardapp.utils.CardsUtils
 import com.example.cardapp.viewmodels.status.CardDataStatus
+import com.example.cardapp.viewmodels.status.CompletableTaskStatus
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -19,6 +22,10 @@ class CardsFragmentViewModel : ViewModel() {
     private var _cardsDataStatus = MutableLiveData<CardDataStatus>().also { it.value = CardDataStatus.Null }
     val cardsDataStatus: LiveData<CardDataStatus>
         get() = _cardsDataStatus
+
+    private var _deleteCardStatus = MutableLiveData<CompletableTaskStatus>()
+    val deleteCardStatus: LiveData<CompletableTaskStatus>
+        get() = _deleteCardStatus
 
     lateinit var marketsData: List<Market>
     lateinit var cardsData: List<Card>
@@ -67,5 +74,17 @@ class CardsFragmentViewModel : ViewModel() {
         BarcodeEncoder().also { it1 ->
             return it1.encodeBitmap(id, format, CardsUtils.QR_CODE_WIDTH, CardsUtils.QR_CODE_HEIGHT)
         }
+    }
+    fun deleteCard(uid: String, card: Card){
+        DataBase.deleteCard(uid, card, object: OnCompleteListener{
+            override fun onSuccess() {
+                _deleteCardStatus.postValue(CompletableTaskStatus.Success)
+            }
+
+            override fun onFail() {
+                _deleteCardStatus.postValue(CompletableTaskStatus.Fail)
+            }
+
+        })
     }
 }

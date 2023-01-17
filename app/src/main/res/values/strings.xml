@@ -61,4 +61,5 @@
     <string name="send_feedback">Send feedback</string>
     <string name="report">Report bugs</string>
     <string name="small_id">Card ID must be more than 5</string>
+    <string name="delete_card">delete card</string>
 </resources>

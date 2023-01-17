@@ -13,6 +13,20 @@
         android:id="@+id/drag_handle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:tint="?attr/colorOnBackground"
+        android:id="@+id/delete"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/delete_card"
+        android:scaleType="fitEnd"
+        app:srcCompat="@drawable/ic_baseline_delete_24" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/bottomSheetMarketName"
         android:layout_width="match_parent"
@@ -27,7 +41,7 @@
         android:text="@string/test_id"
         android:gravity="center"
         style="@style/TextAppearance.Material3.BodyMedium"/>
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:padding="16dp"
         android:layout_marginHorizontal="16dp"
         android:layout_gravity="center"

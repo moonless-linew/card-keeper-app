@@ -18,6 +18,7 @@ import com.example.cardapp.models.Card
 import com.example.cardapp.utils.CardsUtils
 import com.example.cardapp.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.viewmodels.status.CardDataStatus
+import com.example.cardapp.viewmodels.status.CompletableTaskStatus
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -33,6 +34,11 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
                 val dialogBinding: SheetCardBinding = SheetCardBinding.inflate(layoutInflater)
                 dialogBinding.bottomSheetCardId.text = card.id
                 dialogBinding.bottomSheetMarketName.text = card.market?.name
+                dialogBinding.delete.setOnClickListener {
+                    viewModel.deleteCard(Firebase.auth.uid!!, card)
+                    dialog.dismiss()
+                    startLoading()
+                }
                 dialogBinding.bottomSheetQrView.also { image ->
                     image.setImageBitmap(viewModel.generateQRCodeBitmap(card.id ?: CardsUtils.DEFAULT_ID,
                         BarcodeFormat.valueOf(card.codeType ?: CardsUtils.DEFAULT_FORMAT)))
@@ -68,11 +74,24 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
     private fun setupObservers() {
         viewModel.cardsDataStatus.observe(viewLifecycleOwner) {
             when (it) {
-                CardDataStatus.Fail -> {}
+                CardDataStatus.Fail -> toastError(getString(R.string.error))
                 CardDataStatus.Success -> applyCards()
                 CardDataStatus.Empty -> showEmpty()
                 CardDataStatus.Null -> downloadData()
 
+            }
+        }
+
+        viewModel.deleteCardStatus.observe(viewLifecycleOwner) {
+            when(it){
+                CompletableTaskStatus.Fail -> {
+                    toastError(getString(R.string.error))
+                    stopLoading()
+                }
+                CompletableTaskStatus.Success -> {
+                    downloadData()
+                    stopLoading()
+                }
             }
         }
     }
@@ -88,6 +107,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
     private fun showEmpty() {
         binding.cardsRecycler.visibility = View.INVISIBLE
         binding.textNothingToShow.visibility = View.VISIBLE
+        stopLoading()
     }
 
     private fun startLoading() {
@@ -103,5 +123,8 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
             downloadData()
         }
     }
+    private fun toastError(msg: String) =
+        Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
+
 
 }
