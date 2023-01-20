@@ -6,11 +6,11 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.cardapp.fragments.drawer.UserFragment"
+        android:name="com.example.cardapp.presentation.fragments.drawer.UserFragment"
         android:label="@string/account" />
     <fragment
         android:id="@+id/cardsFragment"
-        android:name="com.example.cardapp.fragments.drawer.CardsFragment"
+        android:name="com.example.cardapp.presentation.fragments.drawer.CardsFragment"
         android:label="@string/your_cards" >
         <action
             android:id="@+id/action_cardsFragment_to_searchMarketFragment"
@@ -18,11 +18,11 @@
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
-        android:name="com.example.cardapp.fragments.drawer.DescriptionFragment"
+        android:name="com.example.cardapp.presentation.fragments.drawer.DescriptionFragment"
         android:label="@string/about_card_app" />
     <fragment
         android:id="@+id/addCardFragment"
-        android:name="com.example.cardapp.fragments.drawer.AddCardFragment"
+        android:name="com.example.cardapp.presentation.fragments.drawer.AddCardFragment"
         android:label="@string/add_new_card" >
         <action
             android:id="@+id/action_addCardFragment_to_cardsFragment"
@@ -33,11 +33,11 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.cardapp.fragments.drawer.SettingsFragment"
+        android:name="com.example.cardapp.presentation.fragments.drawer.SettingsFragment"
         android:label="@string/settings"/>
     <fragment
         android:id="@+id/searchMarketFragment"
-        android:name="com.example.cardapp.fragments.drawer.SearchMarketFragment"
+        android:name="com.example.cardapp.presentation.fragments.drawer.SearchMarketFragment"
         android:label="SearchMarketFragment" >
         <action
             android:id="@+id/action_searchMarketFragment_to_addCardFragment"
