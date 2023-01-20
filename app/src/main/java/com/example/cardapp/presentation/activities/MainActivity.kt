@@ -1,6 +1,9 @@
 package com.example.cardapp.presentation.activities
 
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.example.cardapp.R
@@ -16,6 +19,13 @@ class MainActivity : AppCompatActivity() {
     private val binding
         get() = _binding!!
 
+    private val requestPermissions: ActivityResultLauncher<Array<String>> =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            it.forEach { (permission, granted) ->
+                Log.i("Permission", "Permission $permission granted state: $granted" )
+            }
+        }
+
     private lateinit var auth: FirebaseAuth
 
     //this is a single activity
@@ -23,6 +33,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        requestPermissions.launch(
+            arrayOf(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+            )
+        )
         auth = Firebase.auth
         setupNavigation()
     }

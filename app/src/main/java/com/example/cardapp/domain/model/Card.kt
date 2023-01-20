@@ -1,8 +1,8 @@
 package com.example.cardapp.domain.model
 
-class Card{
-    var id: String? = null
-    var marketID: String? = null
-    var market: Market? = null
-    var codeType: String? = null
-}
+data class Card(
+    val id: String? = null,
+    val marketID: String? = null,
+    var marketNetwork: MarketNetwork? = null,
+    val codeType: String? = null,
+)

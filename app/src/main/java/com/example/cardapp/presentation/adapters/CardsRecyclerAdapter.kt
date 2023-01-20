@@ -25,8 +25,8 @@ class CardsRecyclerAdapter(val data: List<Card>, val callback: CardCallback) : A
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.binding.cardID.text = data[position].id
-        holder.binding.marketName.text = data[position].market?.name
-        holder.binding.RelativeView.setBackgroundColor(Color.parseColor(data[position].market?.color))
+        holder.binding.marketName.text = data[position].marketNetwork?.name
+        holder.binding.RelativeView.setBackgroundColor(Color.parseColor(data[position].marketNetwork?.color))
 
         holder.binding.root.setOnClickListener {
             callback.onClick(data[position])

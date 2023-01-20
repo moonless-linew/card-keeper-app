@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cardapp.domain.repository.ICardRepository
 import com.example.cardapp.domain.repository.IMarketRepository
 import com.example.cardapp.domain.model.Card
-import com.example.cardapp.domain.model.Market
+import com.example.cardapp.domain.model.MarketNetwork
 import com.example.cardapp.presentation.model.status.CardUploadStatus
 import com.example.cardapp.presentation.model.status.MarketDataStatus
 import com.google.firebase.auth.ktx.auth
@@ -54,21 +54,20 @@ class AddCardFragmentViewModel @Inject constructor(
         _cardUploadingStatus.postValue(CardUploadStatus.Success)
     }
 
-    fun setMarket(market: Market) {
-        _chosenCard.postValue(Card().also {
-            it.market = market
-            it.marketID = market.id
-        })
+    fun setMarket(marketNetwork: MarketNetwork) {
+        _chosenCard.postValue(
+            Card(marketNetwork = marketNetwork, marketID = marketNetwork.id)
+        )
     }
 
     fun setCardCodeType(codeType: String?) {
-        _chosenCard.value?.codeType = codeType
-        _chosenCard.postValue(_chosenCard.value)
+        val changedCard = _chosenCard.value?.copy(codeType = codeType) ?: return
+        _chosenCard.postValue(changedCard)
     }
 
     fun setCardID(id: String) {
-        _chosenCard.value?.id = id
-        _chosenCard.postValue(_chosenCard.value)
+        val changedCard = _chosenCard.value?.copy(id = id) ?: return
+        _chosenCard.postValue(changedCard)
     }
 
     fun reset() {

@@ -41,7 +41,7 @@ class AddCardFragment : Fragment() {
         setupDoneButton()
         setupCardDataObserver()
         setupCardUploadObserver()
-        binding.RelativeView.setBackgroundColor(Color.parseColor(viewModel.chosenCard.value?.market?.color))
+        binding.RelativeView.setBackgroundColor(Color.parseColor(viewModel.chosenCard.value?.marketNetwork?.color))
         return binding.root
     }
 
@@ -91,7 +91,7 @@ class AddCardFragment : Fragment() {
     private fun setupCardDataObserver() {
         viewModel.chosenCard.observe(viewLifecycleOwner) {
             binding.cardID.text = it.id
-            binding.marketName.text = viewModel.chosenCard.value?.market?.name
+            binding.marketName.text = viewModel.chosenCard.value?.marketNetwork?.name
         }
     }
 

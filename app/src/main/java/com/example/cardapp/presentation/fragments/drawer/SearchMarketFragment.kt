@@ -11,7 +11,7 @@ import com.example.cardapp.R
 import com.example.cardapp.presentation.adapters.MarketsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentMarketSearchBinding
 import com.example.cardapp.extensions.navigateSafely
-import com.example.cardapp.domain.model.Market
+import com.example.cardapp.domain.model.MarketNetwork
 import com.example.cardapp.presentation.viewmodels.AddCardFragmentViewModel
 import com.example.cardapp.presentation.model.status.MarketDataStatus
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,7 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
 
     private val binding by viewBinding(FragmentMarketSearchBinding::bind)
     private val viewModel: AddCardFragmentViewModel by activityViewModels()
-    private val callback: (market: Market) -> Unit = {
+    private val callback: (marketNetwork: MarketNetwork) -> Unit = {
         viewModel.setMarket(it)
         findNavController().navigateSafely(R.id.action_searchMarketFragment_to_addCardFragment)
     }
@@ -35,14 +35,14 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
         viewModel.marketsDataStatus.observe(viewLifecycleOwner) {
             when (it) {
                 MarketDataStatus.Fail -> toastError(getString(R.string.error))
-                is MarketDataStatus.Success -> applyMarkets(it.markets)
+                is MarketDataStatus.Success -> applyMarkets(it.marketNetworks)
                 MarketDataStatus.Null -> downloadMarkets()
             }
         }
     }
 
-    private fun applyMarkets(markets: List<Market>) {
-        binding.marketsRecycler.adapter = MarketsRecyclerAdapter(markets, callback)
+    private fun applyMarkets(marketNetworks: List<MarketNetwork>) {
+        binding.marketsRecycler.adapter = MarketsRecyclerAdapter(marketNetworks, callback)
         stopLoading()
     }
 

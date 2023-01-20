@@ -1,9 +1,9 @@
 package com.example.cardapp.domain.model
 
-class Market {
-    val id: String? = null
-    val name: String? = null
-    val color: String? = null
-    @Suppress
-    val addresses: List<Address>? = null
-}
+class Market(
+    val NetId: String?,
+    val address: String?,
+    val geoHash: String?,
+    val lat: Long?,
+    val long: Long?
+)

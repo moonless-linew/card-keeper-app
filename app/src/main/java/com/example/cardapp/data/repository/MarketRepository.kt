@@ -1,7 +1,7 @@
 package com.example.cardapp.data.repository
 
 import com.example.cardapp.domain.repository.IMarketRepository
-import com.example.cardapp.domain.model.Market
+import com.example.cardapp.domain.model.MarketNetwork
 import com.example.cardapp.utils.ApiUtils
 import com.google.firebase.firestore.CollectionReference
 import javax.inject.Inject
@@ -16,25 +16,25 @@ class MarketRepository @Inject constructor(
 ) : IMarketRepository {
     override suspend fun getMarketsByIds(
         ids: List<String>,
-    ): List<Market> = suspendCoroutine { continuation ->
+    ): List<MarketNetwork> = suspendCoroutine { continuation ->
         marketsRef
             .whereIn(ApiUtils.API_ID_FIELD, ids)
             .get()
             .addOnSuccessListener { documents ->
-                val markets = documents.toObjects(Market::class.java)
-                continuation.resume(markets)
+                val marketNetworks = documents.toObjects(MarketNetwork::class.java)
+                continuation.resume(marketNetworks)
             }
             .addOnFailureListener {
                 continuation.resumeWithException(it)
             }
     }
 
-    override suspend fun getAllMarkets(): List<Market> = suspendCoroutine { continuation ->
+    override suspend fun getAllMarkets(): List<MarketNetwork> = suspendCoroutine { continuation ->
         marketsRef
             .get()
             .addOnSuccessListener { documents ->
-                val markets = documents.toObjects(Market::class.java)
-                continuation.resume(markets)
+                val marketNetworks = documents.toObjects(MarketNetwork::class.java)
+                continuation.resume(marketNetworks)
             }
             .addOnFailureListener {
                 continuation.resumeWithException(it)

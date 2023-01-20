@@ -1,9 +1,12 @@
 package com.example.cardapp.presentation.fragments.drawer
 
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +22,7 @@ import com.example.cardapp.utils.CardsUtils
 import com.example.cardapp.presentation.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.presentation.model.status.CardDataStatus
 import com.example.cardapp.presentation.model.status.CompletableTaskStatus
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -29,29 +33,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class CardsFragment : Fragment(R.layout.fragment_cards) {
     private val binding by viewBinding(FragmentCardsBinding::bind)
     private val viewModel: CardsFragmentViewModel by viewModels()
-    private val cardCallback: CardCallback =  object: CardCallback {
+    private val cardCallback: CardCallback = object : CardCallback {
         override fun onClick(card: Card) {
-            BottomSheetDialog(requireActivity()).also { dialog ->
-                val dialogBinding: SheetCardBinding = SheetCardBinding.inflate(layoutInflater)
-                dialogBinding.bottomSheetCardId.text = card.id
-                dialogBinding.bottomSheetMarketName.text = card.market?.name
-                dialogBinding.delete.setOnClickListener {
-                    viewModel.deleteCard(Firebase.auth.uid!!, card)
-                    dialog.dismiss()
-                    startLoading()
-                }
-                dialogBinding.bottomSheetQrView.also { image ->
-                    image.setImageBitmap(viewModel.generateQRCodeBitmap(card.id ?: CardsUtils.DEFAULT_ID,
-                        BarcodeFormat.valueOf(card.codeType ?: CardsUtils.DEFAULT_FORMAT)))
-                }
-                dialog.run {
-                    this.setContentView(dialogBinding.root)
-                    this.show()
-                }
-
-            }
+            provideQRDialog(card)
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,8 +52,19 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         }
     }
 
-    private fun downloadData() {
-        viewModel.downloadUserCards(Firebase.auth.uid!!)
+    private fun checkPermission(): Boolean = ActivityCompat.checkSelfPermission(
+        requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+        requireActivity(),
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    ) != PackageManager.PERMISSION_GRANTED
+
+    private fun getCardsData() {
+        val uid = Firebase.auth.uid ?: return
+        val locationClient = if (checkPermission())
+            LocationServices.getFusedLocationProviderClient(requireActivity())
+        else null
+        viewModel.getUsersCards(uid, locationClient)
         startLoading()
     }
 
@@ -78,26 +74,23 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
                 CardDataStatus.Fail -> toastError(getString(R.string.error))
                 is CardDataStatus.Success -> applyCards(it.cards)
                 CardDataStatus.Empty -> showEmpty()
-                CardDataStatus.Null -> downloadData()
-
+                CardDataStatus.Null -> getCardsData()
             }
         }
 
         viewModel.deleteCardStatus.observe(viewLifecycleOwner) {
-            when(it){
+            when (it) {
                 CompletableTaskStatus.Fail -> {
                     toastError(getString(R.string.error))
                     stopLoading()
                 }
                 CompletableTaskStatus.Success -> {
-                    downloadData()
+                    getCardsData()
                     stopLoading()
                 }
             }
         }
     }
-
-
 
     private fun applyCards(cards: List<Card>) {
         binding.cardsRecycler.adapter =
@@ -119,13 +112,38 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         binding.cardsRecycler.hideShimmerAdapter()
         binding.swipeRefresh.isRefreshing = false
     }
+
     private fun setupSwipeRefresh() {
         binding.swipeRefresh.setOnRefreshListener {
-            downloadData()
+            getCardsData()
         }
     }
+
+    private fun provideQRDialog(card: Card) {
+        val dialog = BottomSheetDialog(requireActivity())
+        val dialogBinding: SheetCardBinding = SheetCardBinding.inflate(layoutInflater).apply {
+            bottomSheetCardId.text = card.id
+            bottomSheetMarketName.text = card.marketNetwork?.name
+            delete.setOnClickListener {
+                viewModel.deleteCard(Firebase.auth.uid!!, card)
+                dialog.dismiss()
+                startLoading()
+            }
+            bottomSheetQrView.also { image ->
+                image.setImageBitmap(
+                    viewModel.generateQRCodeBitmap(
+                        card.id ?: CardsUtils.DEFAULT_ID,
+                        BarcodeFormat.valueOf(card.codeType ?: CardsUtils.DEFAULT_FORMAT)
+                    )
+                )
+            }
+        }
+        dialog.apply {
+            setContentView(dialogBinding.root)
+            show()
+        }
+    }
+
     private fun toastError(msg: String) =
         Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
-
-
 }
