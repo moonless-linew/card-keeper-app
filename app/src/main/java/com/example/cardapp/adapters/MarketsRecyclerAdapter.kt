@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.cardapp.databinding.ItemMarketBinding
-import com.example.cardapp.models.Market
+import com.example.cardapp.models.MarketNetwork
 
-class MarketsRecyclerAdapter(val markets: List<Market>, val callback: (market: Market) -> Unit) :
+class MarketsRecyclerAdapter(val markets: List<MarketNetwork>, val callback: (market: MarketNetwork) -> Unit) :
     Adapter<MarketsRecyclerAdapter.MarketViewHolder>() {
     class MarketViewHolder(val binding: ItemMarketBinding) : ViewHolder(binding.root)
 

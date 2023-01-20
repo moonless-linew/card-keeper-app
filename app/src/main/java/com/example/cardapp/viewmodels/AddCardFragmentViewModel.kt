@@ -7,7 +7,7 @@ import com.example.cardapp.database.DataBase
 import com.example.cardapp.interfaces.OnCollectionDownloadCompleteListener
 import com.example.cardapp.interfaces.OnCompleteListener
 import com.example.cardapp.models.Card
-import com.example.cardapp.models.Market
+import com.example.cardapp.models.MarketNetwork
 import com.example.cardapp.viewmodels.status.CardUploadStatus
 import com.example.cardapp.viewmodels.status.MarketDataStatus
 import com.google.firebase.auth.ktx.auth
@@ -17,7 +17,7 @@ import com.google.firebase.ktx.Firebase
 class AddCardFragmentViewModel: ViewModel() {
 
 
-    lateinit var marketsData: List<Market>
+    lateinit var marketsData: List<MarketNetwork>
 
     var _marketsDataStatus = MutableLiveData<MarketDataStatus>().also { it.value = MarketDataStatus.Null }
     val marketsDataStatus: LiveData<MarketDataStatus>
@@ -34,7 +34,7 @@ class AddCardFragmentViewModel: ViewModel() {
     fun downloadMarkets() {
         DataBase.downloadMarkets(object: OnCollectionDownloadCompleteListener{
             override fun onSuccess(documents: QuerySnapshot) {
-                marketsData = documents.toObjects(Market::class.java)
+                marketsData = documents.toObjects(MarketNetwork::class.java)
                 _marketsDataStatus.postValue(MarketDataStatus.Success)
             }
 
@@ -58,10 +58,10 @@ class AddCardFragmentViewModel: ViewModel() {
         })
     }
 
-    fun setMarket(market: Market){
+    fun setMarket(marketNetwork: MarketNetwork){
         _chosenCard.postValue(Card().also{
-            it.market = market
-            it.marketID = market.id
+            it.market = marketNetwork
+            it.marketID = marketNetwork.id
         })
     }
     fun setCardCodeType(codeType: String?){

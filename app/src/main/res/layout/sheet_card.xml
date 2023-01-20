@@ -13,19 +13,35 @@
         android:id="@+id/drag_handle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:tint="?attr/colorOnBackground"
-        android:id="@+id/delete"
-        android:clickable="true"
-        android:focusable="true"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/delete_card"
-        android:scaleType="fitEnd"
-        app:srcCompat="@drawable/ic_baseline_delete_24" />
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="16dp">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:tint="?attr/colorOnBackground"
+            android:id="@+id/share"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/delete_card"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/ic_baseline_share_24"
+            android:layout_weight="1"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_weight="1"
+            android:tint="?attr/colorOnBackground"
+            android:id="@+id/delete"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/delete_card"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_baseline_delete_24" />
+    </LinearLayout>
+
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/bottomSheetMarketName"

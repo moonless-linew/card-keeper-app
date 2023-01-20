@@ -11,7 +11,7 @@ import com.example.cardapp.R
 import com.example.cardapp.adapters.MarketsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentMarketSearchBinding
 import com.example.cardapp.extensions.navigateSafely
-import com.example.cardapp.models.Market
+import com.example.cardapp.models.MarketNetwork
 import com.example.cardapp.viewmodels.AddCardFragmentViewModel
 import com.example.cardapp.viewmodels.status.MarketDataStatus
 
@@ -19,7 +19,7 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
 
     private val binding by viewBinding(FragmentMarketSearchBinding::bind)
     private val viewModel: AddCardFragmentViewModel by activityViewModels()
-    private val callback: (market: Market) -> Unit = {
+    private val callback: (market: MarketNetwork) -> Unit = {
         viewModel.setMarket(it)
         findNavController().navigateSafely(R.id.action_searchMarketFragment_to_addCardFragment)
     }

@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
     implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
 
+    implementation 'com.firebase:geofire-android-common:3.2.0'
 
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 

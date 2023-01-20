@@ -8,12 +8,15 @@ import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
 import com.example.cardapp.models.Card
 
 import com.example.cardapp.utils.ApiUtils
+import com.firebase.geofire.GeoFireUtils
+import com.firebase.geofire.GeoLocation
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.protobuf.Api
 import java.util.concurrent.TimeUnit
 
 object DataBase {
@@ -66,6 +69,16 @@ object DataBase {
             .addOnFailureListener {
                 listener.onFail(it)
             }
+    }
+
+    fun downloadListNearestMarket(netIds: List<String>, hashIds: List<String>, listener: OnCollectionDownloadCompleteListener){
+        FirebaseFirestore.getInstance()
+            .collection(ApiUtils.API_MARKET_NETWORK_COLLECTION)
+            .whereIn("NetId", netIds)
+            .whereIn("geohash", hashIds)
+            .get()
+            .addOnSuccessListener { listener.onSuccess(it) }
+            .addOnFailureListener{ listener.onFail(it) }
     }
 
     fun uploadCard(uid: String, card: Card, listener: OnCompleteListener) {
