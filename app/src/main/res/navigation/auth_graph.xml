@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/signFragment"
-        android:name="com.example.cardapp.fragments.auth.SignFragment"
+        android:name="com.example.cardapp.presentation.fragments.auth.SignFragment"
         android:label="SignFragment" >
         <action
             android:id="@+id/action_signFragment_to_phoneFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/phoneFragment"
-        android:name="com.example.cardapp.fragments.auth.PhoneFragment"
+        android:name="com.example.cardapp.presentation.fragments.auth.PhoneFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_phoneFragment_to_smsFragment"
@@ -25,11 +25,11 @@
     </fragment>
     <fragment
         android:id="@+id/nameFragment"
-        android:name="com.example.cardapp.fragments.auth.NameFragment"
+        android:name="com.example.cardapp.presentation.fragments.auth.NameFragment"
         android:label="NameFragment" />
     <fragment
         android:id="@+id/smsFragment"
-        android:name="com.example.cardapp.fragments.auth.SmsFragment"
+        android:name="com.example.cardapp.presentation.fragments.auth.SmsFragment"
         android:label="SmsFragment" >
         <action
             android:id="@+id/action_smsFragment_to_nameFragment"

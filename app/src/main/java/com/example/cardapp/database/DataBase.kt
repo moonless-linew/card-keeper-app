@@ -17,57 +17,6 @@ import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
 object DataBase {
-
-    fun loginUserWithName(listener: OnCompleteListener) {
-        Firebase.auth.signInAnonymously().addOnSuccessListener {
-            listener.onSuccess()
-        }.addOnFailureListener {
-            listener.onFail()
-        }
-    }
-
-    fun loginUserWithPhone(
-        credential: PhoneAuthCredential,
-        listener: OnCompleteListener,
-    ) {
-        Firebase.auth.signInWithCredential(credential).addOnSuccessListener {
-            listener.onSuccess()
-        }.addOnFailureListener {
-            listener.onFail()
-        }
-    }
-
-    fun createUser(
-        uid: String,
-        name: String?,
-        phone: String?,
-        listener: OnCompleteListener,
-    ) {
-        FirebaseFirestore.getInstance()
-            .collection(ApiUtils.API_USERS_COLLECTION)
-            .document(uid)
-            .set(hashMapOf(ApiUtils.API_NAME_FIELD to name, ApiUtils.API_PHONE_FIELD to phone))
-            .addOnSuccessListener {
-                listener.onSuccess()
-            }
-            .addOnFailureListener {
-                listener.onFail()
-            }
-    }
-
-    fun downloadUser(uid: String, listener: OnDocumentDownloadCompleteListener) {
-        FirebaseFirestore.getInstance()
-            .collection(ApiUtils.API_USERS_COLLECTION)
-            .document(uid)
-            .get()
-            .addOnSuccessListener {
-                listener.onSuccess(it)
-            }
-            .addOnFailureListener {
-                listener.onFail(it)
-            }
-    }
-
     fun uploadCard(uid: String, card: Card, listener: OnCompleteListener) {
         FirebaseFirestore.getInstance()
             .collection(ApiUtils.API_USERS_COLLECTION)
@@ -137,20 +86,5 @@ object DataBase {
             .addOnFailureListener {
                 listener.onFail(it)
             }
-    }
-
-
-    fun initPhoneAuth(
-        phone: String,
-        activity: FragmentActivity,
-        callback: PhoneAuthProvider.OnVerificationStateChangedCallbacks,
-    ) {
-        val options = PhoneAuthOptions.newBuilder(Firebase.auth)
-            .setPhoneNumber(phone)
-            .setTimeout(30L, TimeUnit.SECONDS)
-            .setActivity(activity)
-            .setCallbacks(callback)
-            .build()
-        PhoneAuthProvider.verifyPhoneNumber(options)
     }
 }
