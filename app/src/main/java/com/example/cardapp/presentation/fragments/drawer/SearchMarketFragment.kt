@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cardapp.R
 import com.example.cardapp.presentation.adapters.MarketsRecyclerAdapter
@@ -26,6 +27,8 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
         findNavController().navigateSafely(R.id.action_searchMarketFragment_to_addCardFragment)
     }
 
+    private val args: SearchMarketFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupObservers()
         super.onViewCreated(view, savedInstanceState)
@@ -34,7 +37,11 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
     private fun setupObservers() {
         viewModel.marketsDataStatus.observe(viewLifecycleOwner) {
             when (it) {
-                MarketDataStatus.Fail -> toastError(getString(R.string.error))
+                MarketDataStatus.Fail -> {
+                    toastError(getString(R.string.error))
+                    binding.errorText.visibility = View.VISIBLE
+                    stopLoading()
+                }
                 is MarketDataStatus.Success -> applyMarkets(it.marketNetworks)
                 MarketDataStatus.Null -> downloadMarkets()
             }
@@ -47,18 +54,20 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
     }
 
     private fun downloadMarkets() {
-        viewModel.downloadMarkets()
+        viewModel.downloadMarkets(args.marketNetIds)
         startLoading()
-
     }
 
     private fun toastError(msg: String) =
         Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
 
 
-    private fun startLoading() = binding.marketsRecycler.showShimmerAdapter()
+    private fun startLoading() {
+        binding.errorText.visibility = View.GONE
+        binding.marketsRecycler.showShimmerAdapter()
+    }
 
-    private fun stopLoading() = binding.marketsRecycler.hideShimmerAdapter()
-
-
+    private fun stopLoading() {
+        binding.marketsRecycler.hideShimmerAdapter()
+    }
 }

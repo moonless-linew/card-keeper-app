@@ -35,6 +35,7 @@
     <string name="wrong_code">Wrong code</string>
     <string name="add_description">add new card</string>
     <string name="disk_link">Download the coolest app in the World!!\n https://disk.yandex.ru/d/uasodtkR8Olhhw</string>
+    <string name="share_card">Download the coolest app in the World!!\n https://disk.yandex.ru/d/uasodtkR8Olhhw</string>
     <string name="image_of_store">image of store</string>
     <string name="searchShop">Search shop</string>
     <string name="nothing_to_show">Nothing to show</string>
@@ -62,4 +63,6 @@
     <string name="report">Report bugs</string>
     <string name="small_id">Card ID must be more than 5</string>
     <string name="delete_card">delete card</string>
+    <string name="needPermission">Need permission for GPS sort</string>
+    <string name="choose_market">Choose market</string>
 </resources>

@@ -48,7 +48,12 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
 
     private fun setupFloatingButton() {
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigateSafely(R.id.action_cardsFragment_to_searchMarketFragment)
+            val cardsStatus = viewModel.cardsDataStatus.value
+            val marketsIds = if (cardsStatus is CardDataStatus.Success)
+                cardsStatus.cards.mapNotNull { it.marketID }.toTypedArray()
+            else emptyArray()
+            val action = CardsFragmentDirections.actionCardsFragmentToSearchMarketFragment(marketsIds)
+            findNavController().navigate(action)
         }
     }
 
@@ -71,7 +76,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
     private fun setupObservers() {
         viewModel.cardsDataStatus.observe(viewLifecycleOwner) {
             when (it) {
-                CardDataStatus.Fail -> toastError(getString(R.string.error))
+                CardDataStatus.Fail -> showEmpty(isError = true)
                 is CardDataStatus.Success -> applyCards(it.cards)
                 CardDataStatus.Empty -> showEmpty()
                 CardDataStatus.Null -> getCardsData()
@@ -98,13 +103,16 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         stopLoading()
     }
 
-    private fun showEmpty() {
+    private fun showEmpty(isError: Boolean = false) {
         binding.cardsRecycler.visibility = View.INVISIBLE
         binding.textNothingToShow.visibility = View.VISIBLE
+        val textLabel = if (isError) R.string.error else R.string.nothing_to_show
+        binding.textNothingToShow.text = requireContext().getString(textLabel)
         stopLoading()
     }
 
     private fun startLoading() {
+        binding.textNothingToShow.visibility = View.GONE
         binding.cardsRecycler.showShimmerAdapter()
     }
 

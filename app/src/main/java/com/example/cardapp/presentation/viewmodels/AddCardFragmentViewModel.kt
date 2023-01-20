@@ -34,10 +34,10 @@ class AddCardFragmentViewModel @Inject constructor(
     val cardUploadingStatus: LiveData<CardUploadStatus>
         get() = _cardUploadingStatus
 
-    fun downloadMarkets() {
+    fun downloadMarkets(marketNetIds: Array<String>) {
         viewModelScope.launch {
             try {
-                val markets = marketRepository.getAllMarkets()
+                val markets = marketRepository.getAllMarkets().filter { it.id !in marketNetIds }
                 _marketsDataStatus.postValue(MarketDataStatus.Success(markets))
             } catch (e: Exception) {
                 _marketsDataStatus.postValue(MarketDataStatus.Fail)

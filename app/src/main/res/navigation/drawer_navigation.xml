@@ -42,6 +42,10 @@
         <action
             android:id="@+id/action_searchMarketFragment_to_addCardFragment"
             app:destination="@id/addCardFragment" />
+        <argument
+            android:name="marketNetIds"
+            app:argType="string[]"
+            app:nullable="false"/>
     </fragment>
 
 </navigation>
