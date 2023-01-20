@@ -5,5 +5,5 @@ import com.google.firebase.firestore.QuerySnapshot
 
 interface OnCollectionDownloadCompleteListener {
     fun onSuccess(documents: QuerySnapshot)
-    fun onFail(e: Exception)
+    fun onFail(e: java.lang.Exception)
 }
