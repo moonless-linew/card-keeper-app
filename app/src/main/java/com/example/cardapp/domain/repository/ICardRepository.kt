@@ -1,6 +1,6 @@
 package com.example.cardapp.domain.repository
 
-import com.example.cardapp.models.Card
+import com.example.cardapp.domain.model.Card
 
 interface ICardRepository {
     suspend fun uploadCard(uid: String, card: Card)

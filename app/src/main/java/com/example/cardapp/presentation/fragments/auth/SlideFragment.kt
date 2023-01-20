@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.cardapp.databinding.FragmentSlideBinding
-import com.example.cardapp.models.Slide
+import com.example.cardapp.domain.model.Slide
 import com.example.cardapp.utils.SlidesUtils
 import dagger.hilt.android.AndroidEntryPoint
 

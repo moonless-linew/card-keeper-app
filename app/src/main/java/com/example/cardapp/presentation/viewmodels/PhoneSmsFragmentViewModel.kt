@@ -1,16 +1,12 @@
 package com.example.cardapp.presentation.viewmodels
 
 import android.app.Activity
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cardapp.database.DataBase
 import com.example.cardapp.domain.model.SmsCredential
 import com.example.cardapp.domain.repository.IAuthRepository
-import com.example.cardapp.interfaces.OnCompleteListener
-import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
 import com.example.cardapp.presentation.model.status.PhoneAuthStatus
 import com.example.cardapp.presentation.model.status.SmsStatus
 import com.google.firebase.FirebaseException
@@ -19,8 +15,6 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.ktx.getField
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -85,21 +79,14 @@ class PhoneSmsFragmentViewModel @Inject constructor(
     fun checkRegistration() {
         val uid = Firebase.auth.uid ?: return
         viewModelScope.launch {
-            authRepository.getUser(uid, object : OnDocumentDownloadCompleteListener {
-                override fun onSuccess(document: DocumentSnapshot) {
-                    if (document.getField<String>("name") != null) {
-                        _authStatus.postValue(PhoneAuthStatus.Registered)
-                    } else {
-                        _authStatus.postValue(PhoneAuthStatus.NotRegistered)
-                    }
-                }
+            try {
+                val name = authRepository.getUser(uid)
+                val phoneStatus = if (name != null) PhoneAuthStatus.Registered else PhoneAuthStatus.NotRegistered
+                _authStatus.postValue(phoneStatus)
 
-                override fun onFail(e: Exception) {
-                    _authStatus.postValue(PhoneAuthStatus.InternetError)
-                }
-
-            })
-
+            } catch (e: Exception) {
+                _authStatus.postValue(PhoneAuthStatus.InternetError)
+            }
         }
     }
 }

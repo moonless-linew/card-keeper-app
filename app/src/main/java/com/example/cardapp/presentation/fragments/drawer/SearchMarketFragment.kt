@@ -8,10 +8,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cardapp.R
-import com.example.cardapp.adapters.MarketsRecyclerAdapter
+import com.example.cardapp.presentation.adapters.MarketsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentMarketSearchBinding
 import com.example.cardapp.extensions.navigateSafely
-import com.example.cardapp.models.Market
+import com.example.cardapp.domain.model.Market
 import com.example.cardapp.presentation.viewmodels.AddCardFragmentViewModel
 import com.example.cardapp.presentation.model.status.MarketDataStatus
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,14 +35,14 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
         viewModel.marketsDataStatus.observe(viewLifecycleOwner) {
             when (it) {
                 MarketDataStatus.Fail -> toastError(getString(R.string.error))
-                MarketDataStatus.Success -> applyMarkets()
+                is MarketDataStatus.Success -> applyMarkets(it.markets)
                 MarketDataStatus.Null -> downloadMarkets()
             }
         }
     }
 
-    private fun applyMarkets() {
-        binding.marketsRecycler.adapter = MarketsRecyclerAdapter(viewModel.marketsData, callback)
+    private fun applyMarkets(markets: List<Market>) {
+        binding.marketsRecycler.adapter = MarketsRecyclerAdapter(markets, callback)
         stopLoading()
     }
 

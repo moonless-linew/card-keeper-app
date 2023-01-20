@@ -1,7 +1,9 @@
 package com.example.cardapp.presentation.model.status
 
-sealed class MarketDataStatus {
-    object Success: MarketDataStatus()
-    object Fail: MarketDataStatus()
-    object Null: MarketDataStatus()
+import com.example.cardapp.domain.model.Market
+
+sealed interface MarketDataStatus {
+    class Success(val markets: List<Market>): MarketDataStatus
+    object Fail: MarketDataStatus
+    object Null: MarketDataStatus
 }

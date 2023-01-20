@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cardapp.domain.repository.IAuthRepository
-import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
-import com.example.cardapp.models.User
-import com.google.firebase.firestore.DocumentSnapshot
+import com.example.cardapp.domain.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,14 +19,12 @@ class MainFlowFragmentViewModel @Inject constructor(
 
     fun downloadUser(uid: String) {
         viewModelScope.launch {
-            if (_user.value?.name == null) {
-                authRepository.getUser(uid, object : OnDocumentDownloadCompleteListener {
-                    override fun onSuccess(document: DocumentSnapshot) {
-                        _user.postValue(User(document.get("name").toString(), "", null))
-                    }
+            _user.value?.name ?: return@launch
+            try {
+                val name = authRepository.getUser(uid)
+                _user.postValue(User(name ?: "Undefined", "", null))
+            } catch (e: Exception) {
 
-                    override fun onFail(e: Exception) {}
-                })
             }
         }
     }

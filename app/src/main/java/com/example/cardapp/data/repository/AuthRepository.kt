@@ -2,12 +2,11 @@ package com.example.cardapp.data.repository
 
 import com.example.cardapp.domain.model.SmsCredential
 import com.example.cardapp.domain.repository.IAuthRepository
-import com.example.cardapp.interfaces.OnCompleteListener
-import com.example.cardapp.interfaces.OnDocumentDownloadCompleteListener
 import com.example.cardapp.utils.ApiUtils
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.ktx.getField
 import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 import javax.inject.Named
@@ -54,15 +53,18 @@ class AuthRepository @Inject constructor(
             }
     }
 
-    override suspend fun getUser(uid: String, listener: OnDocumentDownloadCompleteListener) {
+    override suspend fun getUser(
+        uid: String
+    ): String? = suspendCoroutine { continuation ->
         usersRef
             .document(uid)
             .get()
-            .addOnSuccessListener {
-                listener.onSuccess(it)
+            .addOnSuccessListener { document ->
+                val name = document.getField<String>("name")
+                continuation.resume(name)
             }
             .addOnFailureListener {
-                listener.onFail(it)
+                continuation.resumeWithException(it)
             }
     }
 }

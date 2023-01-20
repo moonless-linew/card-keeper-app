@@ -1,11 +1,11 @@
-package com.example.cardapp.adapters
+package com.example.cardapp.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.cardapp.databinding.ItemMarketBinding
-import com.example.cardapp.models.Market
+import com.example.cardapp.domain.model.Market
 
 class MarketsRecyclerAdapter(val markets: List<Market>, val callback: (market: Market) -> Unit) :
     Adapter<MarketsRecyclerAdapter.MarketViewHolder>() {

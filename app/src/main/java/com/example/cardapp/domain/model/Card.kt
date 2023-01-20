@@ -1,4 +1,4 @@
-package com.example.cardapp.models
+package com.example.cardapp.domain.model
 
 class Card{
     var id: String? = null

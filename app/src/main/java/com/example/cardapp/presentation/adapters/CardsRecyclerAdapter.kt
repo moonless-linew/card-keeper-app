@@ -1,19 +1,12 @@
-package com.example.cardapp.adapters
+package com.example.cardapp.presentation.adapters
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
 import com.example.cardapp.databinding.ItemCardBinding
-import com.example.cardapp.interfaces.CardCallback
-import com.example.cardapp.models.Card
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
+import com.example.cardapp.domain.model.Card
 
 class CardsRecyclerAdapter(val data: List<Card>, val callback: CardCallback) : Adapter<CardsRecyclerAdapter.ItemViewHolder>() {
 

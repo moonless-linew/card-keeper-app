@@ -9,12 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cardapp.R
-import com.example.cardapp.adapters.CardsRecyclerAdapter
+import com.example.cardapp.presentation.adapters.CardsRecyclerAdapter
 import com.example.cardapp.databinding.FragmentCardsBinding
 import com.example.cardapp.databinding.SheetCardBinding
 import com.example.cardapp.extensions.navigateSafely
-import com.example.cardapp.interfaces.CardCallback
-import com.example.cardapp.models.Card
+import com.example.cardapp.presentation.adapters.CardCallback
+import com.example.cardapp.domain.model.Card
 import com.example.cardapp.utils.CardsUtils
 import com.example.cardapp.presentation.viewmodels.CardsFragmentViewModel
 import com.example.cardapp.presentation.model.status.CardDataStatus
@@ -29,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CardsFragment : Fragment(R.layout.fragment_cards) {
     private val binding by viewBinding(FragmentCardsBinding::bind)
     private val viewModel: CardsFragmentViewModel by viewModels()
-    private val cardCallback: CardCallback =  object: CardCallback{
+    private val cardCallback: CardCallback =  object: CardCallback {
         override fun onClick(card: Card) {
             BottomSheetDialog(requireActivity()).also { dialog ->
                 val dialogBinding: SheetCardBinding = SheetCardBinding.inflate(layoutInflater)

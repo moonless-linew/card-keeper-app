@@ -2,7 +2,7 @@ package com.example.cardapp.utils
 
 import android.content.Context
 import com.example.cardapp.R
-import com.example.cardapp.models.Slide
+import com.example.cardapp.domain.model.Slide
 
 object SlidesUtils {
     const val TITLE = "title"

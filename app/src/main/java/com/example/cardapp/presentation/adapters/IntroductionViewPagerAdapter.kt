@@ -1,10 +1,10 @@
-package com.example.cardapp.adapters
+package com.example.cardapp.presentation.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.cardapp.presentation.fragments.auth.SignFragment
 import com.example.cardapp.presentation.fragments.auth.SlideFragment
-import com.example.cardapp.models.Slide
+import com.example.cardapp.domain.model.Slide
 
 class IntroductionViewPagerAdapter(fragment: SignFragment, private val data: List<Slide>):  FragmentStateAdapter(fragment){
     override fun getItemCount(): Int {

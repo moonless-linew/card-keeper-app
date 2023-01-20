@@ -1,7 +1,7 @@
 package com.example.cardapp.data.repository
 
 import com.example.cardapp.domain.repository.ICardRepository
-import com.example.cardapp.models.Card
+import com.example.cardapp.domain.model.Card
 import com.example.cardapp.utils.ApiUtils
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
