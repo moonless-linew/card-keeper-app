@@ -76,7 +76,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         viewModel.cardsDataStatus.observe(viewLifecycleOwner) {
             when (it) {
                 CardDataStatus.Fail -> toastError(getString(R.string.error))
-                CardDataStatus.Success -> applyCards()
+                is CardDataStatus.Success -> applyCards(it.cards)
                 CardDataStatus.Empty -> showEmpty()
                 CardDataStatus.Null -> downloadData()
 
@@ -99,9 +99,9 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
 
 
 
-    private fun applyCards() {
+    private fun applyCards(cards: List<Card>) {
         binding.cardsRecycler.adapter =
-            CardsRecyclerAdapter(viewModel.cardsData, cardCallback)
+            CardsRecyclerAdapter(cards, cardCallback)
         stopLoading()
     }
 

@@ -1,4 +1,4 @@
-package com.example.cardapp.applications
+package com.example.cardapp.presentation
 
 import android.app.Application
 import com.google.android.material.color.DynamicColors

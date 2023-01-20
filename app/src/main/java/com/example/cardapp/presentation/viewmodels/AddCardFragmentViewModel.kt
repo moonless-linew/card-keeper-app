@@ -3,7 +3,10 @@ package com.example.cardapp.presentation.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.cardapp.data.repository.CardRepository
 import com.example.cardapp.database.DataBase
+import com.example.cardapp.domain.repository.ICardRepository
 import com.example.cardapp.interfaces.OnCollectionDownloadCompleteListener
 import com.example.cardapp.interfaces.OnCompleteListener
 import com.example.cardapp.models.Card
@@ -14,10 +17,13 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddCardFragmentViewModel @Inject constructor(): ViewModel() {
+class AddCardFragmentViewModel @Inject constructor(
+    private val cardRepository: ICardRepository
+): ViewModel() {
 
 
     lateinit var marketsData: List<Market>
@@ -49,16 +55,11 @@ class AddCardFragmentViewModel @Inject constructor(): ViewModel() {
     }
 
     fun uploadCard(){
-        DataBase.uploadCard(Firebase.auth.uid!!, _chosenCard.value ?: Card(), object: OnCompleteListener{
-            override fun onSuccess() {
-                _cardUploadingStatus.postValue(CardUploadStatus.Success)
-            }
-
-            override fun onFail() {
-                _cardUploadingStatus.postValue(CardUploadStatus.Fail)
-            }
-
-        })
+        val uid = Firebase.auth.uid ?: return
+        viewModelScope.launch {
+            cardRepository.uploadCard(uid, _chosenCard.value ?: Card())
+        }
+        _cardUploadingStatus.postValue(CardUploadStatus.Success)
     }
 
     fun setMarket(market: Market){

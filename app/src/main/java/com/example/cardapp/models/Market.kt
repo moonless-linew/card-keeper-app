@@ -1,6 +1,6 @@
 package com.example.cardapp.models
 
-class Market(){
+class Market {
     val id: String? = null
     val name: String? = null
     val color: String? = null

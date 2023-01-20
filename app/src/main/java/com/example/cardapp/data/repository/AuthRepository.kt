@@ -38,7 +38,6 @@ class AuthRepository @Inject constructor(
         }
     }
 
-    //  почему-то коллбэк не отрабатывается
     override suspend fun createUser(
         uid: String,
         name: String,

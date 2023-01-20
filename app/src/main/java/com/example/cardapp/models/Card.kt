@@ -1,6 +1,5 @@
 package com.example.cardapp.models
 
-
 class Card{
     var id: String? = null
     var marketID: String? = null

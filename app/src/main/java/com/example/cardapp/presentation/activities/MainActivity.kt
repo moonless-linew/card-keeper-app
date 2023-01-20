@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
         setupNavigation()
-
     }
 
 
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         _binding = null
         super.onDestroy()
     }
-
 
     private fun setupNavigation() {
         val navHostFragment =

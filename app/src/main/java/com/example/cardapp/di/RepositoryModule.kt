@@ -1,7 +1,9 @@
 package com.example.cardapp.di
 
 import com.example.cardapp.data.repository.AuthRepository
+import com.example.cardapp.data.repository.CardRepository
 import com.example.cardapp.domain.repository.IAuthRepository
+import com.example.cardapp.domain.repository.ICardRepository
 import com.google.firebase.firestore.CollectionReference
 import dagger.Module
 import dagger.Provides
@@ -17,4 +19,9 @@ object RepositoryModule {
     @ViewModelScoped
     fun provideAuthRepository(@Named("users") usersRef: CollectionReference): IAuthRepository =
         AuthRepository(usersRef)
+
+    @Provides
+    @ViewModelScoped
+    fun provideCardRepository(@Named("users") usersRef: CollectionReference): ICardRepository =
+        CardRepository(usersRef)
 }
