@@ -87,10 +87,10 @@ class CardsFragmentViewModel @Inject constructor(
             cards[i].marketNetwork = markets.find { it.id == cards[i].marketID }
         }
         val sortedCards = if (minDistanceMarkets.isNotEmpty())
-            cards.sortedBy { card ->
+            cards.sortedWith(compareBy<Card> { card ->
                 minDistanceMarkets.find { it.netId == card.marketID }?.distance
                     ?: Double.MAX_VALUE
-            } else cards
+            }.thenBy { it.marketNetwork?.name ?: ""} ) else cards
         _cardsDataStatus.postValue(CardDataStatus.Success(sortedCards))
     }
 

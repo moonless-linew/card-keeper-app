@@ -42,7 +42,14 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
                     binding.errorText.visibility = View.VISIBLE
                     stopLoading()
                 }
-                is MarketDataStatus.Success -> applyMarkets(it.marketNetworks)
+                is MarketDataStatus.Success -> {
+                    applyMarkets(it.marketNetworks)
+                    if (it.marketNetworks.isEmpty()) {
+                        binding.errorText.visibility = View.VISIBLE
+                        binding.marketsRecycler.visibility = View.GONE
+                        binding.errorText.text = getString(R.string.no_available_markets)
+                    }
+                }
                 MarketDataStatus.Null -> downloadMarkets()
             }
         }

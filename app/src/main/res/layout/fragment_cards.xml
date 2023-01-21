@@ -25,7 +25,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textNothingToShow"
-        style="@style/TextAppearance.Material3.HeadlineLarge"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

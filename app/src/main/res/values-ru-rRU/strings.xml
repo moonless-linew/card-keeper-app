@@ -57,4 +57,5 @@
     <string name="pref_notifications">Включить уведомления</string>
     <string name="send_feedback">Отправить отзыв</string>
     <string name="report">Наругать разработчика</string>
+    <string name="no_available_markets">Нет доступных магазинных сетей</string>
 </resources>
