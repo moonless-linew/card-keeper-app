@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/searchMarketFragment"
         android:name="com.example.cardapp.presentation.fragments.drawer.SearchMarketFragment"
-        android:label="SearchMarketFragment" >
+        android:label="@string/choose_market" >
         <action
             android:id="@+id/action_searchMarketFragment_to_addCardFragment"
             app:destination="@id/addCardFragment" />

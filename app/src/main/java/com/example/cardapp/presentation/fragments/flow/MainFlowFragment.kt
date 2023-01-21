@@ -55,11 +55,12 @@ class MainFlowFragment : ParentFlowFragment(
 
     override fun setupListeners() {
         viewModel.user.observe(viewLifecycleOwner) {
+            val ss = it?.name
             binding
                 .navigationView
                 .getHeaderView(0)
                 .findViewById<TextView>(R.id.nameText)
-                .text = it?.name
+                .text = ss
         }
     }
 

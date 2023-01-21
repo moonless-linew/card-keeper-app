@@ -32,6 +32,7 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupObservers()
         super.onViewCreated(view, savedInstanceState)
+        binding.errorText.visibility = View.GONE
     }
 
     private fun setupObservers() {

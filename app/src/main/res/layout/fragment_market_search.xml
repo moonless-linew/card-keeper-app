@@ -19,11 +19,11 @@
 
     <TextView
         android:id="@+id/error_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         style="@style/TextAppearance.Material3.HeadlineLarge"
         android:text="@string/no_available_markets"
-        android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

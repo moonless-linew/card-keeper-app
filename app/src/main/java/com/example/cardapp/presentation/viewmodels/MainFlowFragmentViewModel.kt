@@ -19,7 +19,6 @@ class MainFlowFragmentViewModel @Inject constructor(
 
     fun downloadUser(uid: String) {
         viewModelScope.launch {
-            _user.value?.name ?: return@launch
             try {
                 val name = authRepository.getUser(uid)
                 _user.postValue(User(name ?: "Undefined", "", null))
