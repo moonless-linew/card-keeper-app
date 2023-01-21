@@ -58,4 +58,5 @@
     <string name="send_feedback">Отправить отзыв</string>
     <string name="report">Наругать разработчика</string>
     <string name="no_available_markets">Нет доступных магазинных сетей</string>
+    <string name="choose_market">Выберите магазин</string>
 </resources>
