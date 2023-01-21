@@ -60,6 +60,10 @@ class AddCardFragmentViewModel @Inject constructor(
         )
     }
 
+    fun resetMarketDataStatus() {
+        _marketsDataStatus.postValue(MarketDataStatus.Null)
+    }
+
     fun setCardCodeType(codeType: String?) {
         val changedCard = _chosenCard.value?.copy(codeType = codeType) ?: return
         _chosenCard.postValue(changedCard)

@@ -46,13 +46,17 @@ class SearchMarketFragment : Fragment(R.layout.fragment_market_search) {
                     applyMarkets(it.marketNetworks)
                     if (it.marketNetworks.isEmpty()) {
                         binding.errorText.visibility = View.VISIBLE
-                        binding.marketsRecycler.visibility = View.GONE
                         binding.errorText.text = getString(R.string.no_available_markets)
                     }
                 }
                 MarketDataStatus.Null -> downloadMarkets()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.resetMarketDataStatus()
     }
 
     private fun applyMarkets(marketNetworks: List<MarketNetwork>) {
